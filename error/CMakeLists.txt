@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(error)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wpedantic")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wnon-virtual-dtor -Wpedantic")
 set(CMAKE_CXX_STANDARD 11)
 
 add_library(error src/error.cpp)
