@@ -1,6 +1,6 @@
 # Error
 
-A C++ error utility package.
+A C++ package that provides utilities for error handling.
 
 ## License
 

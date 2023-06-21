@@ -7,7 +7,7 @@ A comprehensive collection of [C++](https://isocpp.org/) utility packages.
 
 ## Packages
 
-- [Error](./error) [WIP], an error utility package.
+- [Error](./error) [WIP]: Provides utilities for error handling.
 
 ## License
 
