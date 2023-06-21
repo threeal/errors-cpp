@@ -14,15 +14,15 @@ jobs:
       - name: Configure, build, and test this project
         uses: threeal/cmake-action@v1.1.0
         with:
-          source-dir: example
-          build-dir: example/build
+          source-dir: error
+          build-dir: error/build
           args: -DBUILD_TESTING=ON
           run-test: true
 
       - name: Check code coverage
         uses: threeal/gcovr-action@v0.2.0
         with:
-          root: example
+          root: error
           exclude: build/*
           fail-under-line: 80
 
@@ -35,8 +35,8 @@ jobs:
       - name: Configure and build this project
         uses: threeal/cmake-action@v1.1.0
         with:
-          source-dir: example
-          build-dir: example/build
+          source-dir: error
+          build-dir: error/build
           cxx-flags: -Werror
           args: -DBUILD_TESTING=ON
 
@@ -50,9 +50,9 @@ jobs:
         run: pip3 install cmake-format
 
       - name: Configure CMake
-        run: cmake example -B example/build
+        run: cmake error -B error/build
 
       - name: Check code formatting
         run: |
-          cmake --build example/build --target format
-          cmake --build example/build --target check-format
+          cmake --build error/build --target format
+          cmake --build error/build --target check-format

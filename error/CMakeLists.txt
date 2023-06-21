@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(example)
+project(error)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wpedantic")
 
-add_library(example src/example.cpp)
-target_include_directories(example PUBLIC include)
+add_library(error src/example.cpp)
+target_include_directories(error PUBLIC include)
 
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   include(cmake/CPM.cmake)
@@ -19,8 +19,8 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -fPIC -O0")
 
-    add_executable(example_test test/example_test.cpp)
-    target_link_libraries(example_test PRIVATE example Catch2::Catch2WithMain)
-    catch_discover_tests(example_test)
+    add_executable(error_test test/example_test.cpp)
+    target_link_libraries(error_test PRIVATE error Catch2::Catch2WithMain)
+    catch_discover_tests(error_test)
   endif()
 endif()
