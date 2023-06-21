@@ -23,7 +23,7 @@ jobs:
         uses: threeal/gcovr-action@v0.2.0
         with:
           root: example
-          exclude: build/*
+          exclude: example/build/*
           fail-under-line: 80
 
   check-warning:
