@@ -2,6 +2,8 @@
 
 namespace error {
 
-const char* Error::what() const noexcept { return "unknown error"; }
+Error::Error(const char* message) : message(message) {}
+
+const char* Error::what() const noexcept { return message; }
 
 }  // namespace error
