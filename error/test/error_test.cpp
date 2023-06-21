@@ -2,8 +2,29 @@
 #include <error/error.hpp>
 #include <string>
 
-TEST_CASE("Constructs an error") {
+TEST_CASE("Error Construction") {
   const error::Error err("unknown error");
-  const std::string expected("unknown error");
-  REQUIRE(expected.compare(err.what()) == 0);
+  REQUIRE(std::string("unknown error") == err.what());
+}
+
+TEST_CASE("Error Throwing and Catching") {
+  SECTION("Catch as error::Error") {
+    try {
+      throw error::Error("unknown error");
+    } catch (const error::Error& err) {
+      REQUIRE(std::string("unknown error") == err.what());
+    } catch (...) {
+      FAIL("Expected to be caught as error::Error");
+    }
+  }
+
+  SECTION("Catch as std::exception") {
+    try {
+      throw error::Error("unknown error");
+    } catch (const std::exception& e) {
+      REQUIRE(std::string("unknown error") == e.what());
+    } catch (...) {
+      FAIL("Expected to be caught as std::exception");
+    }
+  }
 }
