@@ -5,6 +5,10 @@
 
 A comprehensive collection of [C++](https://isocpp.org/) utility packages.
 
+## Packages
+
+- [Error](./error) [WIP]: Provides utilities for error handling.
+
 ## License
 
 This project is licensed under the terms of the [MIT License](./LICENSE).
