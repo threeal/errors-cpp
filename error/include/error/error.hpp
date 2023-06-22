@@ -3,6 +3,7 @@
 #include <fmt/core.h>
 
 #include <exception>
+#include <memory>
 #include <string>
 #include <utility>
 
@@ -32,5 +33,22 @@ class Error : public std::exception {
    */
   const char* what() const noexcept override;
 };
+
+/**
+ * @brief Alias for a shared pointer to the `Error` class.
+ */
+using ErrorPtr = std::shared_ptr<Error>;
+
+/**
+ * @brief Creates a new error pointer with the given format for the message.
+ * @tparam T Variadic template parameter pack for format arguments.
+ * @param fmt A format string for the message.
+ * @param args Format arguments.
+ * @return Shared pointer to a new error.
+ */
+template <typename... T>
+ErrorPtr make(fmt::format_string<T...> fmt, T&&... args) {
+  return std::make_shared<Error>(fmt, std::forward<T>(args)...);
+}
 
 }  // namespace error

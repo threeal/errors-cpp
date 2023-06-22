@@ -14,6 +14,18 @@ TEST_CASE("Error Construction") {
   }
 }
 
+TEST_CASE("Error Pointer Construction") {
+  SECTION("With one argument") {
+    const error::ErrorPtr err = error::make("unknown error");
+    REQUIRE(std::string("unknown error") == err->what());
+  }
+
+  SECTION("With one or more arguments") {
+    const error::ErrorPtr err = error::make("HTTP error {}", 404);
+    REQUIRE(std::string("HTTP error 404") == err->what());
+  }
+}
+
 TEST_CASE("Error Throwing and Catching") {
   SECTION("Catch as error::Error") {
     try {
