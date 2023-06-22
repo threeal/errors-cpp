@@ -16,12 +16,12 @@ TEST_CASE("Error Construction") {
 
 TEST_CASE("Error Pointer Construction") {
   SECTION("With one argument") {
-    const auto err = std::make_shared<error::Error>("unknown error");
+    const error::ErrorPtr err = error::make("unknown error");
     REQUIRE(std::string("unknown error") == err->what());
   }
 
   SECTION("With one or more arguments") {
-    const auto err = std::make_shared<error::Error>("HTTP error {}", 404);
+    const error::ErrorPtr err = error::make("HTTP error {}", 404);
     REQUIRE(std::string("HTTP error 404") == err->what());
   }
 }
