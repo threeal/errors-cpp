@@ -5,6 +5,45 @@ on:
   push:
     branches: [main]
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: [error]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3.5.3
+
+      - name: Install cmake-format
+        run: pip3 install cmake-format
+
+      - name: Configure CMake
+        run: |
+          cmake ${{ matrix.package }} \
+            -B ${{ matrix.package }}/build \
+            -D CMAKE_CXX_FLAGS=-Werror \
+            -D BUILD_TESTING=ON
+
+      - name: Check code formatting
+        run: |
+          cmake --build ${{ matrix.package }}/build --target fix-format
+          git diff --exit-code HEAD
+
+      - name: Build project
+        run: cmake --build ${{ matrix.package }}/build
+
+      - name: Run unit tests
+        run: ctest --test-dir ${{ matrix.package }}/build --output-on-failure --no-tests=error
+
+      - name: Check code coverage
+        uses: threeal/gcovr-action@main
+        with:
+          root: ${{ matrix.package }}
+          excludes: |
+            ${{ matrix.package }}/build/*
+            ${{ matrix.package }}/test/*
+          fail-under-line: 100
+
   release:
     runs-on: ubuntu-latest
     strategy:
@@ -14,7 +53,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3.5.3
 
-      - name: Configure and build this project
+      - name: Configure and build project
         uses: threeal/cmake-action@v1.1.0
         with:
           source-dir: ${{ matrix.package }}
