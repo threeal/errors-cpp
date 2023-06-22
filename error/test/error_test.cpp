@@ -3,8 +3,15 @@
 #include <string>
 
 TEST_CASE("Error Construction") {
-  const error::Error err("unknown error");
-  REQUIRE(std::string("unknown error") == err.what());
+  SECTION("With one argument") {
+    const error::Error err("unknown error");
+    REQUIRE(std::string("unknown error") == err.what());
+  }
+
+  SECTION("With one or more arguments") {
+    const error::Error err("HTTP error {}", 404);
+    REQUIRE(std::string("HTTP error 404") == err.what());
+  }
 }
 
 TEST_CASE("Error Throwing and Catching") {
