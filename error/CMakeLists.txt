@@ -5,11 +5,14 @@ project(error)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wnon-virtual-dtor -Wpedantic")
 set(CMAKE_CXX_STANDARD 11)
 
+include(cmake/CPM.cmake)
+cpmaddpackage("gh:fmtlib/fmt#10.0.0")
+
 add_library(error src/error.cpp)
 target_include_directories(error PUBLIC include)
+target_link_libraries(error PUBLIC fmt)
 
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
-  include(cmake/CPM.cmake)
   cpmaddpackage("gh:TheLartians/Format.cmake@1.7.3")
 
   if(BUILD_TESTING)

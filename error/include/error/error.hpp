@@ -1,7 +1,10 @@
 #pragma once
 
+#include <fmt/core.h>
+
 #include <exception>
 #include <string>
+#include <utility>
 
 namespace error {
 
@@ -14,10 +17,14 @@ class Error : public std::exception {
 
  public:
   /**
-   * @brief Constructs a new error with the given message.
-   * @param message An error message.
+   * @brief Constructs a new error with the given format for the message.
+   * @tparam T Variadic template parameter pack for format arguments.
+   * @param fmt A format string for the message.
+   * @param args Format arguments.
    */
-  Error(const char* message);
+  template <typename... T>
+  Error(fmt::format_string<T...> fmt, T&&... args)
+      : message(fmt::format(fmt, std::forward<T>(args)...)) {}
 
   /**
    * @brief Returns the explanatory string.
