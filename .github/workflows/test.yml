@@ -7,6 +7,9 @@ on:
 jobs:
   unit-tests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: [error]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3.5.3
@@ -14,22 +17,25 @@ jobs:
       - name: Configure, build, and test this project
         uses: threeal/cmake-action@v1.1.0
         with:
-          source-dir: error
-          build-dir: error/build
+          source-dir: ${{ matrix.package }}
+          build-dir: ${{ matrix.package }}/build
           args: -DBUILD_TESTING=ON
           run-test: true
 
       - name: Check code coverage
         uses: threeal/gcovr-action@main
         with:
-          root: error
+          root: ${{ matrix.package }}
           excludes: |
-            error/build/*
-            error/test/*
+            ${{ matrix.package }}/build/*
+            ${{ matrix.package }}/test/*
           fail-under-line: 100
 
   check-warning:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: [error]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3.5.3
@@ -37,13 +43,16 @@ jobs:
       - name: Configure and build this project
         uses: threeal/cmake-action@v1.1.0
         with:
-          source-dir: error
-          build-dir: error/build
+          source-dir: ${{ matrix.package }}
+          build-dir: ${{ matrix.package }}/build
           cxx-flags: -Werror
           args: -DBUILD_TESTING=ON
 
   check-formatting:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: [error]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3.5.3
@@ -52,9 +61,9 @@ jobs:
         run: pip3 install cmake-format
 
       - name: Configure CMake
-        run: cmake error -B error/build
+        run: cmake ${{ matrix.package }} -B ${{ matrix.package }}/build
 
       - name: Check code formatting
         run: |
-          cmake --build error/build --target format
-          cmake --build error/build --target check-format
+          cmake --build ${{ matrix.package }}/build --target format
+          cmake --build ${{ matrix.package }}/build --target check-format
