@@ -1,6 +1,7 @@
 #pragma once
 
 #include <exception>
+#include <string>
 
 namespace error {
 
@@ -9,7 +10,7 @@ namespace error {
  */
 class Error : public std::exception {
  private:
-  const char* message; /**< The error message. */
+  std::string message; /**< The error message. */
 
  public:
   /**
