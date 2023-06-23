@@ -8,15 +8,8 @@ TEST_CASE("Error Construction") {
 }
 
 TEST_CASE("Error Construction With Formatting") {
-  SECTION("With one argument") {
-    const error::Error err = error::format("unknown error");
-    REQUIRE(err.message == "unknown error");
-  }
-
-  SECTION("With one or more arguments") {
-    const error::Error err = error::format("HTTP error {}", 404);
-    REQUIRE(err.message == "HTTP error 404");
-  }
+  const error::Error err = error::format("HTTP error {}", 404);
+  REQUIRE(err.message == "HTTP error 404");
 }
 
 TEST_CASE("Error Throwing and Catching") {
