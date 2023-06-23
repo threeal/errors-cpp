@@ -3,7 +3,6 @@
 #include <fmt/core.h>
 
 #include <exception>
-#include <memory>
 #include <string>
 #include <utility>
 
@@ -27,11 +26,6 @@ struct Error : public std::exception {
    */
   const char* what() const noexcept override;
 };
-
-/**
- * @brief Alias for a shared pointer to the `Error` class.
- */
-using ErrorPtr = std::shared_ptr<Error>;
 
 /**
  * @brief Creates a new error object with a formatted message.
