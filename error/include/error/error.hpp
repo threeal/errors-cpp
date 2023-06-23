@@ -26,13 +26,6 @@ struct Error : public std::exception {
    * @return Pointer to a null-terminated string with explanatory information.
    */
   const char* what() const noexcept override;
-
-  /**
-   * @brief Checks if the error message matches the given string.
-   * @param str A string to be matched.
-   * @return True if it matches, false otherwise.
-   */
-  bool matches(const std::string& str) const noexcept;
 };
 
 /**

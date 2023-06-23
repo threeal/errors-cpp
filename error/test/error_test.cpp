@@ -40,8 +40,3 @@ TEST_CASE("Error Throwing and Catching") {
     }
   }
 }
-
-TEST_CASE("Error Message Matching") {
-  const error::Error err("unknown error");
-  REQUIRE(err.matches("unknown error"));
-}
