@@ -33,3 +33,13 @@ TEST_CASE("Error Throwing and Catching") {
     }
   }
 }
+
+TEST_CASE("Error Comparison") {
+  const auto err = error::Error("unknown error");
+  const auto err_copy = err;
+  CHECK(err == err_copy);
+  CHECK_FALSE(err != err_copy);
+  const auto other_err = error::Error("other error");
+  CHECK_FALSE(err == other_err);
+  CHECK(err != other_err);
+}
