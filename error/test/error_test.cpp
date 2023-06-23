@@ -3,27 +3,13 @@
 #include <string>
 
 TEST_CASE("Error Construction") {
-  SECTION("With one argument") {
-    const error::Error err("unknown error");
-    REQUIRE(err.matches("unknown error"));
-  }
-
-  SECTION("With one or more arguments") {
-    const error::Error err("HTTP error {}", 404);
-    REQUIRE(err.matches("HTTP error 404"));
-  }
+  const error::Error err("unknown error");
+  REQUIRE(err.message == "unknown error");
 }
 
-TEST_CASE("Error Pointer Construction") {
-  SECTION("With one argument") {
-    const error::ErrorPtr err = error::make("unknown error");
-    REQUIRE(err->matches("unknown error"));
-  }
-
-  SECTION("With one or more arguments") {
-    const error::ErrorPtr err = error::make("HTTP error {}", 404);
-    REQUIRE(err->matches("HTTP error 404"));
-  }
+TEST_CASE("Error Construction With Formatting") {
+  const error::Error err = error::format("HTTP error {}", 404);
+  REQUIRE(err.message == "HTTP error 404");
 }
 
 TEST_CASE("Error Throwing and Catching") {
@@ -31,7 +17,7 @@ TEST_CASE("Error Throwing and Catching") {
     try {
       throw error::Error("unknown error");
     } catch (const error::Error& err) {
-      REQUIRE(err.matches("unknown error"));
+      REQUIRE(err.message == "unknown error");
     } catch (...) {
       FAIL("Expected to be caught as error::Error");
     }
@@ -46,9 +32,4 @@ TEST_CASE("Error Throwing and Catching") {
       FAIL("Expected to be caught as std::exception");
     }
   }
-}
-
-TEST_CASE("Error Message Matching") {
-  const error::Error err("unknown error");
-  REQUIRE(err.matches("unknown error"));
 }

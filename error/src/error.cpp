@@ -2,10 +2,8 @@
 
 namespace error {
 
-const char* Error::what() const noexcept { return message.c_str(); }
+Error::Error(const std::string& msg) : message(msg) {}
 
-bool Error::matches(const std::string& str) const noexcept {
-  return message == str;
-}
+const char* Error::what() const noexcept { return message.c_str(); }
 
 }  // namespace error
