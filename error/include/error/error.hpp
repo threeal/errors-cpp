@@ -39,4 +39,12 @@ Error format(fmt::format_string<T...> fmt, T&&... args) {
   return Error(fmt::format(fmt, std::forward<T>(args)...));
 }
 
+/**
+ * @brief Checks if two error objects are equal.
+ * @param lhs The left-hand side error object.
+ * @param rhs The right-hand side error object.
+ * @return True if equal, false otherwise.
+ */
+bool operator==(const Error& lhs, const Error& rhs);
+
 }  // namespace error
