@@ -10,20 +10,16 @@
 namespace error {
 
 /**
- * @brief A struct that represents error information.
+ * @brief Represents error information.
  */
 struct Error : public std::exception {
   std::string message; /**< The error message. */
 
   /**
-   * @brief Constructs a new error with the given format for the message.
-   * @tparam T Variadic template parameter pack for format arguments.
-   * @param fmt A format string for the message.
-   * @param args Format arguments.
+   * @brief Constructs a new error object with the given message.
+   * @param msg An error message.
    */
-  template <typename... T>
-  Error(fmt::format_string<T...> fmt, T&&... args)
-      : message(fmt::format(fmt, std::forward<T>(args)...)) {}
+  Error(const std::string& msg);
 
   /**
    * @brief Returns the explanatory string.
@@ -45,15 +41,15 @@ struct Error : public std::exception {
 using ErrorPtr = std::shared_ptr<Error>;
 
 /**
- * @brief Creates a new error pointer with the given format for the message.
+ * @brief Creates a new error object with a formatted message.
  * @tparam T Variadic template parameter pack for format arguments.
  * @param fmt A format string for the message.
  * @param args Format arguments.
- * @return Shared pointer to a new error.
+ * @return A new error object.
  */
 template <typename... T>
-ErrorPtr make(fmt::format_string<T...> fmt, T&&... args) {
-  return std::make_shared<Error>(fmt, std::forward<T>(args)...);
+Error format(fmt::format_string<T...> fmt, T&&... args) {
+  return Error(fmt::format(fmt, std::forward<T>(args)...));
 }
 
 }  // namespace error
