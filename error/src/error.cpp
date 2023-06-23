@@ -10,4 +10,8 @@ bool operator==(const Error& lhs, const Error& rhs) {
   return lhs.message == rhs.message;
 }
 
+bool operator!=(const Error& lhs, const Error& rhs) {
+  return lhs.message != rhs.message;
+}
+
 }  // namespace error

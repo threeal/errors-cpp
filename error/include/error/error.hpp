@@ -47,4 +47,12 @@ Error format(fmt::format_string<T...> fmt, T&&... args) {
  */
 bool operator==(const Error& lhs, const Error& rhs);
 
+/**
+ * @brief Checks if two error objects are not equal.
+ * @param lhs The left-hand side error object.
+ * @param rhs The right-hand side error object.
+ * @return True if not equal, false otherwise.
+ */
+bool operator!=(const Error& lhs, const Error& rhs);
+
 }  // namespace error
