@@ -10,13 +10,11 @@
 namespace error {
 
 /**
- * @brief A class that represents error information.
+ * @brief A struct that represents error information.
  */
-class Error : public std::exception {
- private:
+struct Error : public std::exception {
   std::string message; /**< The error message. */
 
- public:
   /**
    * @brief Constructs a new error with the given format for the message.
    * @tparam T Variadic template parameter pack for format arguments.
