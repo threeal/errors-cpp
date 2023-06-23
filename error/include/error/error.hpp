@@ -35,10 +35,10 @@ class Error : public std::exception {
 
   /**
    * @brief Checks if the error message matches the given string.
-   * @param str The string to be matched.
+   * @param str A string to be matched.
    * @return True if it matches, false otherwise.
    */
-  bool match(const std::string& str) const noexcept;
+  bool matches(const std::string& str) const noexcept;
 };
 
 /**
