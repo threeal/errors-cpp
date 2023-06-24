@@ -26,7 +26,9 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     cpmaddpackage("gh:catchorg/Catch2@3.3.2")
     include("${Catch2_SOURCE_DIR}/extras/Catch.cmake")
 
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -fPIC -O0")
+    if(NOT MSVC)
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -fPIC -O0")
+    endif()
 
     add_executable(error_test test/error_test.cpp)
     target_link_libraries(error_test PRIVATE error Catch2::Catch2WithMain)
