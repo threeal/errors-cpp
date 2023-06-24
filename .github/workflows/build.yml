@@ -58,3 +58,19 @@ jobs:
         with:
           source-dir: ${{ matrix.package }}
           build-dir: ${{ matrix.package }}/build
+
+  release-msvc:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        package: [error]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3.5.3
+
+      - name: Configure and build project
+        uses: threeal/cmake-action@v1.1.0
+        with:
+          source-dir: ${{ matrix.package }}
+          build-dir: ${{ matrix.package }}/build
+          cxx-compiler: cl
