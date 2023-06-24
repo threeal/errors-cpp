@@ -44,6 +44,29 @@ jobs:
             ${{ matrix.package }}/test/*
           fail-under-line: 100
 
+  debug-msvc:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        package: [error]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3.5.3
+
+      - name: Configure CMake
+        run: |
+          cmake ${{ matrix.package }} `
+            -B ${{ matrix.package }}/build `
+            -D CMAKE_CXX_COMPILER=cl `
+            -D CMAKE_CXX_FLAGS=/WX `
+            -D BUILD_TESTING=ON
+
+      - name: Build project
+        run: cmake --build ${{ matrix.package }}/build
+
+      - name: Run unit tests
+        run: ctest --test-dir ${{ matrix.package }}/build --output-on-failure --no-tests=error
+
   release:
     runs-on: ubuntu-latest
     strategy:
@@ -58,3 +81,19 @@ jobs:
         with:
           source-dir: ${{ matrix.package }}
           build-dir: ${{ matrix.package }}/build
+
+  release-msvc:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        package: [error]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3.5.3
+
+      - name: Configure and build project
+        uses: threeal/cmake-action@v1.1.0
+        with:
+          source-dir: ${{ matrix.package }}
+          build-dir: ${{ matrix.package }}/build
+          cxx-compiler: cl
