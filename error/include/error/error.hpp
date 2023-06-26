@@ -3,6 +3,7 @@
 #include <fmt/core.h>
 
 #include <exception>
+#include <ostream>
 #include <string>
 #include <utility>
 
@@ -19,6 +20,26 @@ struct Error : public std::exception {
    * @param msg An error message.
    */
   Error(const std::string& msg);
+
+  /**
+   * @brief Writes the string representation of an error object to the given
+   * output stream.
+   * @param os The output stream.
+   * @param err The error object.
+   * @return The output stream.
+   *
+   * This operator allows an error object to be printed to the output stream
+   * using the << operator. The error message will be written to the output
+   * stream.
+   *
+   * @code{.cpp}
+   * const error::Error err("unknown error");
+   *
+   * // Print "error: unknown error"
+   * std::cout << err << std::endl;
+   * @endcode
+   */
+  friend std::ostream& operator<<(std::ostream& os, const error::Error& err);
 
   /**
    * @brief Returns the explanatory string.

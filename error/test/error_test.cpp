@@ -1,5 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 #include <error/error.hpp>
+#include <sstream>
 #include <string>
 
 TEST_CASE("Error Construction") {
@@ -42,4 +43,10 @@ TEST_CASE("Error Comparison") {
   const auto other_err = error::Error("other error");
   CHECK_FALSE(err == other_err);
   CHECK(err != other_err);
+}
+
+TEST_CASE("Error Printing") {
+  const error::Error err("unknown error");
+  const auto ss = std::stringstream() << err;
+  REQUIRE(ss.str() == "error: unknown error");
 }
