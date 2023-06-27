@@ -50,6 +50,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3.5.3
 
+      - name: Install cmake-format
+        run: pip3 install cmake-format
+
       - name: Configure CMake
         run: |
           cmake ${{ matrix.package }} `
@@ -72,6 +75,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3.5.3
 
+      # TODO: remove this later
+      - name: Install cmake-format
+        run: pip3 install cmake-format
+
       - name: Configure and build project
         uses: threeal/cmake-action@v1.1.0
         with:
@@ -86,6 +93,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3.5.3
+
+      # TODO: remove this later
+      - name: Install cmake-format
+        run: pip3 install cmake-format
 
       - name: Configure and build project
         uses: threeal/cmake-action@v1.1.0
