@@ -19,7 +19,7 @@ if(SUPPORT_TESTING AND BUILD_TESTING)
 
   # Test coverage is not supported on MSVC.
   if(NOT MSVC)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -fPIC -O0")
+    set(CHECK_COVERAGE TRUE)
   endif()
 endif()
 
@@ -49,5 +49,11 @@ foreach(TARGET IN LISTS TARGETS)
     else()
       target_compile_options(${TARGET} PRIVATE -Werror -Wall -Wextra -Wnon-virtual-dtor -Wpedantic)
     endif()
+  endif()
+
+  # Enable support to check for test coverage.
+  if(CHECK_COVERAGE)
+    target_compile_options(${TARGET} PRIVATE --coverage -O0)
+    target_link_options(${TARGET} PRIVATE --coverage)
   endif()
 endforeach()
