@@ -3,9 +3,9 @@ cmake_minimum_required(VERSION 3.0)
 project(error)
 
 if(MSVC)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /permissive- /W4 /w14640 /EHsc")
+  set(WARNING_FLAGS /permissive- /W4 /w14640 /EHsc)
 else()
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wnon-virtual-dtor -Wpedantic")
+  set(WARNING_FLAGS -Wall -Wextra -Wnon-virtual-dtor -Wpedantic)
 endif()
 
 include(cmake/CPM.cmake)
@@ -14,6 +14,7 @@ cpmaddpackage("gh:fmtlib/fmt#10.0.0")
 add_library(error src/error.cpp)
 target_include_directories(error PUBLIC include)
 target_link_libraries(error PUBLIC fmt)
+target_compile_options(error PRIVATE ${WARNING_FLAGS})
 
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   cpmaddpackage("gh:TheLartians/Format.cmake@1.7.3")
@@ -30,6 +31,8 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 
     add_executable(error_test test/error_test.cpp)
     target_link_libraries(error_test PRIVATE error Catch2::Catch2WithMain)
+    target_compile_options(error_test PRIVATE ${WARNING_FLAGS})
+
     catch_discover_tests(error_test)
   endif()
 endif()
