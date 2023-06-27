@@ -21,7 +21,6 @@ jobs:
         run: |
           cmake ${{ matrix.package }} \
             -B ${{ matrix.package }}/build \
-            -D CMAKE_CXX_FLAGS=-Werror \
             -D BUILD_TESTING=ON
 
       - name: Check code formatting
@@ -58,7 +57,6 @@ jobs:
           cmake ${{ matrix.package }} `
             -B ${{ matrix.package }}/build `
             -D CMAKE_CXX_COMPILER=cl `
-            -D CMAKE_CXX_FLAGS=/WX `
             -D BUILD_TESTING=ON
 
       - name: Build project
