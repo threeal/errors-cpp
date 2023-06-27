@@ -3,9 +3,9 @@ cmake_minimum_required(VERSION 3.0)
 project(error)
 
 if(MSVC)
-  set(WARNING_FLAGS /permissive- /W4 /w14640 /EHsc)
+  set(WARNING_FLAGS /WX /permissive- /W4 /w14640 /EHsc)
 else()
-  set(WARNING_FLAGS -Wall -Wextra -Wnon-virtual-dtor -Wpedantic)
+  set(WARNING_FLAGS -Werror -Wall -Wextra -Wnon-virtual-dtor -Wpedantic)
 endif()
 
 include(cmake/CPM.cmake)
