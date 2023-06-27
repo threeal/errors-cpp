@@ -8,8 +8,6 @@ else()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wnon-virtual-dtor -Wpedantic")
 endif()
 
-set(CMAKE_CXX_STANDARD 11)
-
 include(cmake/CPM.cmake)
 cpmaddpackage("gh:fmtlib/fmt#10.0.0")
 
