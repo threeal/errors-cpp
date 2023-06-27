@@ -2,17 +2,12 @@ cmake_minimum_required(VERSION 3.0)
 
 project(error)
 
-if(MSVC)
-  set(WARNING_FLAGS /WX /permissive- /W4 /w14640 /EHsc)
-else()
-  set(WARNING_FLAGS -Werror -Wall -Wextra -Wnon-virtual-dtor -Wpedantic)
-endif()
-
 include(cmake/CPM.cmake)
 
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   cpmaddpackage("gh:TheLartians/Format.cmake@1.7.3")
   set(SUPPORT_TESTING TRUE)
+  set(CHECK_WARNINGS TRUE)
 endif()
 
 if(SUPPORT_TESTING AND BUILD_TESTING)
@@ -33,11 +28,21 @@ cpmaddpackage("gh:fmtlib/fmt#10.0.0")
 add_library(error src/error.cpp)
 target_include_directories(error PUBLIC include)
 target_link_libraries(error PUBLIC fmt)
-target_compile_options(error PRIVATE ${WARNING_FLAGS})
 
 if(SUPPORT_TESTING AND BUILD_TESTING)
   add_executable(error_test test/error_test.cpp)
   target_link_libraries(error_test PRIVATE error Catch2::Catch2WithMain)
-  target_compile_options(error_test PRIVATE ${WARNING_FLAGS})
   catch_discover_tests(error_test)
 endif()
+
+set(TARGETS error error_test)
+foreach(TARGET IN LISTS TARGETS)
+  # Statically analyze code by checking for warnings.
+  if(CHECK_WARNINGS)
+    if(MSVC)
+      target_compile_options(${TARGET} PRIVATE /WX /permissive- /W4 /w14640 /EHsc)
+    else()
+      target_compile_options(${TARGET} PRIVATE -Werror -Wall -Wextra -Wnon-virtual-dtor -Wpedantic)
+    endif()
+  endif()
+endforeach()
