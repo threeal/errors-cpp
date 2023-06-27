@@ -15,6 +15,7 @@ target_link_libraries(error PUBLIC fmt)
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   # Import Format.cmake to format source code
   cpmaddpackage("gh:TheLartians/Format.cmake@1.7.3")
+  add_dependencies(error fix-format)
 
   if(BUILD_TESTING)
     enable_testing()
