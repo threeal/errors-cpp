@@ -35,7 +35,12 @@ if(SUPPORT_TESTING AND BUILD_TESTING)
   catch_discover_tests(error_test)
 endif()
 
-set(TARGETS error error_test)
+# Get all targets in this directory.
+get_property(
+  TARGETS
+  DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+  PROPERTY BUILDSYSTEM_TARGETS)
+
 foreach(TARGET IN LISTS TARGETS)
   # Statically analyze code by checking for warnings.
   if(CHECK_WARNINGS)
