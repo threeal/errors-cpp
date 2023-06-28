@@ -15,6 +15,7 @@ target_link_libraries(error PUBLIC fmt)
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   option(CHECK_FORMAT "Enable source code formatting check" OFF)
   option(CHECK_WARNING "Enable static analysis warning check" OFF)
+  option(CHECK_COVERAGE "Enable test coverage check" OFF)
 
   # Import Format.cmake to format source code
   if(CHECK_FORMAT)
@@ -52,7 +53,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     endif()
 
     # Enable support to check for test coverage
-    if(BUILD_TESTING AND NOT MSVC)
+    if(BUILD_TESTING AND CHECK_COVERAGE AND NOT MSVC)
       target_compile_options(${TARGET} PRIVATE --coverage -O0)
       target_link_options(${TARGET} PRIVATE --coverage)
     endif()
