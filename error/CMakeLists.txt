@@ -14,6 +14,7 @@ target_link_libraries(error PUBLIC fmt)
 # Check if this project is the main project
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   option(CHECK_FORMAT "Enable source code formatting check" OFF)
+  option(CHECK_WARNING "Enable static analysis warning check" OFF)
 
   # Import Format.cmake to format source code
   if(CHECK_FORMAT)
@@ -42,10 +43,12 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 
   foreach(TARGET IN LISTS TARGETS)
     # Statically analyze code by checking for warnings
-    if(MSVC)
-      target_compile_options(${TARGET} PRIVATE /WX /permissive- /W4 /w14640 /EHsc)
-    else()
-      target_compile_options(${TARGET} PRIVATE -Werror -Wall -Wextra -Wnon-virtual-dtor -Wpedantic)
+    if(CHECK_WARNING)
+      if(MSVC)
+        target_compile_options(${TARGET} PRIVATE /WX /permissive- /W4 /w14640 /EHsc)
+      else()
+        target_compile_options(${TARGET} PRIVATE -Werror -Wall -Wextra -Wnon-virtual-dtor -Wpedantic)
+      endif()
     endif()
 
     # Enable support to check for test coverage

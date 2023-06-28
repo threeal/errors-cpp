@@ -22,7 +22,8 @@ jobs:
           cmake ${{ matrix.package }} \
             -B ${{ matrix.package }}/build \
             -D BUILD_TESTING=ON \
-            -D CHECK_FORMAT=ON
+            -D CHECK_FORMAT=ON \
+            -D CHECK_WARNING=ON
 
       - name: Build project
         run: cmake --build ${{ matrix.package }}/build
@@ -56,7 +57,8 @@ jobs:
           cmake ${{ matrix.package }} `
             -B ${{ matrix.package }}/build `
             -D CMAKE_CXX_COMPILER=cl `
-            -D BUILD_TESTING=ON
+            -D BUILD_TESTING=ON `
+            -D CHECK_WARNING=ON
 
       - name: Build project
         run: cmake --build ${{ matrix.package }}/build
