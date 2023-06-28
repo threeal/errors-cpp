@@ -21,12 +21,10 @@ jobs:
         run: |
           cmake ${{ matrix.package }} \
             -B ${{ matrix.package }}/build \
-            -D BUILD_TESTING=ON
-
-      - name: Check code formatting
-        run: |
-          cmake --build ${{ matrix.package }}/build --target fix-format
-          git diff --exit-code HEAD
+            -D BUILD_TESTING=ON \
+            -D CHECK_FORMAT=ON \
+            -D CHECK_WARNING=ON \
+            -D CHECK_COVERAGE=ON
 
       - name: Build project
         run: cmake --build ${{ matrix.package }}/build
@@ -43,6 +41,9 @@ jobs:
             ${{ matrix.package }}/test/*
           fail-under-line: 100
 
+      - name: Check diff
+        run: git diff --exit-code HEAD
+
   debug-msvc:
     runs-on: windows-latest
     strategy:
@@ -57,7 +58,8 @@ jobs:
           cmake ${{ matrix.package }} `
             -B ${{ matrix.package }}/build `
             -D CMAKE_CXX_COMPILER=cl `
-            -D BUILD_TESTING=ON
+            -D BUILD_TESTING=ON `
+            -D CHECK_WARNING=ON
 
       - name: Build project
         run: cmake --build ${{ matrix.package }}/build

@@ -13,8 +13,15 @@ target_link_libraries(error PUBLIC fmt)
 
 # Check if this project is the main project
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  option(CHECK_FORMAT "Enable source code formatting check" OFF)
+  option(CHECK_WARNING "Enable static analysis warning check" OFF)
+  option(CHECK_COVERAGE "Enable test coverage check" OFF)
+
   # Import Format.cmake to format source code
-  cpmaddpackage("gh:TheLartians/Format.cmake@1.7.3")
+  if(CHECK_FORMAT)
+    cpmaddpackage("gh:TheLartians/Format.cmake@1.7.3")
+    add_dependencies(error fix-format)
+  endif()
 
   if(BUILD_TESTING)
     enable_testing()
@@ -30,21 +37,20 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   endif()
 
   # Get all targets in this directory
-  get_property(
-    TARGETS
-    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    PROPERTY BUILDSYSTEM_TARGETS)
+  get_property(TARGETS DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY BUILDSYSTEM_TARGETS)
 
   foreach(TARGET IN LISTS TARGETS)
     # Statically analyze code by checking for warnings
-    if(MSVC)
-      target_compile_options(${TARGET} PRIVATE /WX /permissive- /W4 /w14640 /EHsc)
-    else()
-      target_compile_options(${TARGET} PRIVATE -Werror -Wall -Wextra -Wnon-virtual-dtor -Wpedantic)
+    if(CHECK_WARNING)
+      if(MSVC)
+        target_compile_options(${TARGET} PRIVATE /WX /permissive- /W4 /w14640 /EHsc)
+      else()
+        target_compile_options(${TARGET} PRIVATE -Werror -Wall -Wextra -Wnon-virtual-dtor -Wpedantic)
+      endif()
     endif()
 
     # Enable support to check for test coverage
-    if(BUILD_TESTING AND NOT MSVC)
+    if(BUILD_TESTING AND CHECK_COVERAGE AND NOT MSVC)
       target_compile_options(${TARGET} PRIVATE --coverage -O0)
       target_link_options(${TARGET} PRIVATE --coverage)
     endif()
