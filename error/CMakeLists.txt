@@ -37,10 +37,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   endif()
 
   # Get all targets in this directory
-  get_property(
-    TARGETS
-    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    PROPERTY BUILDSYSTEM_TARGETS)
+  get_property(TARGETS DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY BUILDSYSTEM_TARGETS)
 
   foreach(TARGET IN LISTS TARGETS)
     # Statically analyze code by checking for warnings
