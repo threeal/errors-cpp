@@ -19,7 +19,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 
   # Import Format.cmake to format source code
   if(CHECK_FORMAT)
-    cpmaddpackage("gh:TheLartians/Format.cmake@1.7.3")
+    cpmaddpackage("gh:threeal/Format.cmake#auto-install-cmake-format")
     add_dependencies(error fix-format)
   endif()
 

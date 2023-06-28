@@ -14,9 +14,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3.5.3
 
-      - name: Install cmake-format
-        run: pip3 install cmake-format
-
       - name: Configure CMake
         run: |
           cmake ${{ matrix.package }} \
