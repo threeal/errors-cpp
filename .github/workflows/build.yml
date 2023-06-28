@@ -21,7 +21,8 @@ jobs:
         run: |
           cmake ${{ matrix.package }} \
             -B ${{ matrix.package }}/build \
-            -D BUILD_TESTING=ON
+            -D BUILD_TESTING=ON \
+            -D CHECK_FORMAT=ON
 
       - name: Build project
         run: cmake --build ${{ matrix.package }}/build
@@ -50,9 +51,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3.5.3
 
-      - name: Install cmake-format
-        run: pip3 install cmake-format
-
       - name: Configure CMake
         run: |
           cmake ${{ matrix.package }} `
@@ -75,10 +73,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3.5.3
 
-      # TODO: remove this later
-      - name: Install cmake-format
-        run: pip3 install cmake-format
-
       - name: Configure and build project
         uses: threeal/cmake-action@v1.1.0
         with:
@@ -93,10 +87,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3.5.3
-
-      # TODO: remove this later
-      - name: Install cmake-format
-        run: pip3 install cmake-format
 
       - name: Configure and build project
         uses: threeal/cmake-action@v1.1.0

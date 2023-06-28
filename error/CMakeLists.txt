@@ -13,9 +13,13 @@ target_link_libraries(error PUBLIC fmt)
 
 # Check if this project is the main project
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  option(CHECK_FORMAT "Enable source code formatting check" OFF)
+
   # Import Format.cmake to format source code
-  cpmaddpackage("gh:TheLartians/Format.cmake@1.7.3")
-  add_dependencies(error fix-format)
+  if(CHECK_FORMAT)
+    cpmaddpackage("gh:TheLartians/Format.cmake@1.7.3")
+    add_dependencies(error fix-format)
+  endif()
 
   if(BUILD_TESTING)
     enable_testing()
