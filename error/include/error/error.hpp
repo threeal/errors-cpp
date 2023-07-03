@@ -77,3 +77,10 @@ bool operator==(const Error& lhs, const Error& rhs);
 bool operator!=(const Error& lhs, const Error& rhs);
 
 }  // namespace error
+
+template <>
+struct fmt::formatter<error::Error> {
+  format_parse_context::iterator parse(format_parse_context& ctx) const;
+  format_context::iterator format(const error::Error& err,
+                                  format_context& ctx) const;
+};

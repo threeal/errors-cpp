@@ -1,3 +1,5 @@
+#include <fmt/core.h>
+
 #include <catch2/catch_test_macros.hpp>
 #include <error/error.hpp>
 #include <sstream>
@@ -47,6 +49,13 @@ TEST_CASE("Error Comparison") {
 
 TEST_CASE("Error Printing") {
   const error::Error err("unknown error");
-  const auto ss = std::stringstream() << err;
-  REQUIRE(ss.str() == "error: unknown error");
+
+  SECTION("Using ostream") {
+    const auto ss = std::stringstream() << err;
+    REQUIRE(ss.str() == "error: unknown error");
+  }
+
+  SECTION("Using fmtlib") {
+    REQUIRE(fmt::format("{}", err) == "error: unknown error");
+  }
 }
