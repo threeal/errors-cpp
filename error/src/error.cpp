@@ -19,3 +19,17 @@ bool operator!=(const Error& lhs, const Error& rhs) {
 }
 
 }  // namespace error
+
+namespace fmt {
+
+format_parse_context::iterator formatter<error::Error>::parse(
+    format_parse_context& ctx) const {
+  return ctx.begin();
+}
+
+format_context::iterator formatter<error::Error>::format(
+    const error::Error& err, format_context& ctx) const {
+  return format_to(ctx.out(), "error: {}", err.what());
+}
+
+}  // namespace fmt
