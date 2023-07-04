@@ -77,7 +77,7 @@ jobs:
         uses: threeal/cmake-action@v1.2.0
         with:
           source-dir: ${{ matrix.package }}
-          build-dir: ${{ matrix.package }}/build
+          run-build: true
 
   release-msvc:
     runs-on: windows-latest
@@ -92,5 +92,5 @@ jobs:
         uses: threeal/cmake-action@v1.2.0
         with:
           source-dir: ${{ matrix.package }}
-          build-dir: ${{ matrix.package }}/build
           cxx-compiler: cl
+          run-build: true
