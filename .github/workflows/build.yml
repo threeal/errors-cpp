@@ -75,10 +75,10 @@ jobs:
         uses: actions/checkout@v3.5.3
 
       - name: Configure and build project
-        uses: threeal/cmake-action@v1.1.0
+        uses: threeal/cmake-action@v1.2.0
         with:
           source-dir: ${{ matrix.package }}
-          build-dir: ${{ matrix.package }}/build
+          run-build: true
 
   release-msvc:
     runs-on: windows-latest
@@ -90,8 +90,8 @@ jobs:
         uses: actions/checkout@v3.5.3
 
       - name: Configure and build project
-        uses: threeal/cmake-action@v1.1.0
+        uses: threeal/cmake-action@v1.2.0
         with:
           source-dir: ${{ matrix.package }}
-          build-dir: ${{ matrix.package }}/build
           cxx-compiler: cl
+          run-build: true
