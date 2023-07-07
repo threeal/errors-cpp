@@ -27,7 +27,7 @@ struct Error : public std::exception {
    * stream.
    *
    * @code{.cpp}
-   * const error::Error err("unknown error");
+   * const auto err = error::make("unknown error");
    *
    * // Print "error: unknown error"
    * std::cout << err << std::endl;
