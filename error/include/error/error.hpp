@@ -2,7 +2,6 @@
 
 #include <fmt/core.h>
 
-#include <exception>
 #include <ostream>
 #include <string>
 #include <utility>
@@ -12,7 +11,7 @@ namespace error {
 /**
  * @brief Represents error information.
  */
-struct Error : public std::exception {
+struct Error {
   std::string message; /**< The error message. */
 
   /**
@@ -39,7 +38,7 @@ struct Error : public std::exception {
    * @brief Returns the explanatory string.
    * @return Pointer to a null-terminated string with explanatory information.
    */
-  const char* what() const noexcept override;
+  const char* what() const noexcept;
 };
 
 /**

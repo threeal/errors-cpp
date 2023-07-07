@@ -10,6 +10,7 @@ cpmaddpackage("gh:fmtlib/fmt#10.0.0")
 add_library(error src/error.cpp)
 target_include_directories(error PUBLIC include)
 target_link_libraries(error PUBLIC fmt)
+target_compile_features(error PRIVATE cxx_std_20)
 
 # Check if this project is the main project
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
