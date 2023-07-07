@@ -33,12 +33,6 @@ struct Error {
    * @endcode
    */
   friend std::ostream& operator<<(std::ostream& os, const error::Error& err);
-
-  /**
-   * @brief Returns the explanatory string.
-   * @return Pointer to a null-terminated string with explanatory information.
-   */
-  const char* what() const noexcept;
 };
 
 /**
