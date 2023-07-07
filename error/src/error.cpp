@@ -10,6 +10,8 @@ std::ostream& operator<<(std::ostream& os, const error::Error& err) {
 
 const char* Error::what() const noexcept { return message.c_str(); }
 
+Error make(const std::string& msg) { return Error(msg); }
+
 bool operator==(const Error& lhs, const Error& rhs) {
   return lhs.message == rhs.message;
 }
