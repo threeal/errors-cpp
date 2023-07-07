@@ -16,12 +16,6 @@ struct Error : public std::exception {
   std::string message; /**< The error message. */
 
   /**
-   * @brief Constructs a new error object with the given message.
-   * @param msg An error message.
-   */
-  Error(const std::string& msg);
-
-  /**
    * @brief Writes the string representation of an error object to the given
    * output stream.
    * @param os The output stream.
@@ -64,7 +58,7 @@ Error make(const std::string& msg);
  */
 template <typename... T>
 Error format(fmt::format_string<T...> fmt, T&&... args) {
-  return Error(fmt::format(fmt, std::forward<T>(args)...));
+  return error::make(fmt::format(fmt, std::forward<T>(args)...));
 }
 
 /**
