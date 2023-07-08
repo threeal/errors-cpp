@@ -49,6 +49,13 @@ struct Error : public std::exception {
 };
 
 /**
+ * @brief Creates a new error object with the given message.
+ * @param msg The error message.
+ * @return A new error object.
+ */
+Error make(const std::string& msg);
+
+/**
  * @brief Creates a new error object with a formatted message.
  * @tparam T Variadic template parameter pack for format arguments.
  * @param fmt A format string for the message.

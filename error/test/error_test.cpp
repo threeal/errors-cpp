@@ -6,7 +6,7 @@
 #include <string>
 
 TEST_CASE("Error Construction") {
-  const error::Error err("unknown error");
+  const error::Error err = error::make("unknown error");
   REQUIRE(err.message == "unknown error");
 }
 
