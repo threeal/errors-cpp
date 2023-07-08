@@ -12,7 +12,7 @@ namespace error {
  * @brief Represents error information.
  */
 struct Error {
-  std::string message; /**< The error message. */
+  const std::string message; /**< The error message. */
 
   /**
    * @brief Writes the string representation of an error object to the given
