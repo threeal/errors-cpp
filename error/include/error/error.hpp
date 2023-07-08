@@ -2,7 +2,6 @@
 
 #include <fmt/core.h>
 
-#include <exception>
 #include <ostream>
 #include <string>
 #include <utility>
@@ -12,14 +11,8 @@ namespace error {
 /**
  * @brief Represents error information.
  */
-struct Error : public std::exception {
-  std::string message; /**< The error message. */
-
-  /**
-   * @brief Constructs a new error object with the given message.
-   * @param msg An error message.
-   */
-  Error(const std::string& msg);
+struct Error {
+  const std::string message; /**< The error message. */
 
   /**
    * @brief Writes the string representation of an error object to the given
@@ -33,19 +26,13 @@ struct Error : public std::exception {
    * stream.
    *
    * @code{.cpp}
-   * const error::Error err("unknown error");
+   * const auto err = error::make("unknown error");
    *
    * // Print "error: unknown error"
    * std::cout << err << std::endl;
    * @endcode
    */
   friend std::ostream& operator<<(std::ostream& os, const error::Error& err);
-
-  /**
-   * @brief Returns the explanatory string.
-   * @return Pointer to a null-terminated string with explanatory information.
-   */
-  const char* what() const noexcept override;
 };
 
 /**
@@ -64,7 +51,7 @@ Error make(const std::string& msg);
  */
 template <typename... T>
 Error format(fmt::format_string<T...> fmt, T&&... args) {
-  return Error(fmt::format(fmt, std::forward<T>(args)...));
+  return error::make(fmt::format(fmt, std::forward<T>(args)...));
 }
 
 /**

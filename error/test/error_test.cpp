@@ -15,40 +15,18 @@ TEST_CASE("Error Construction With Formatting") {
   REQUIRE(err.message == "HTTP error 404");
 }
 
-TEST_CASE("Error Throwing and Catching") {
-  SECTION("Catch as error::Error") {
-    try {
-      throw error::Error("unknown error");
-    } catch (const error::Error& err) {
-      REQUIRE(err.message == "unknown error");
-    } catch (...) {
-      FAIL("Expected to be caught as error::Error");
-    }
-  }
-
-  SECTION("Catch as std::exception") {
-    try {
-      throw error::Error("unknown error");
-    } catch (const std::exception& e) {
-      REQUIRE(std::string("unknown error") == e.what());
-    } catch (...) {
-      FAIL("Expected to be caught as std::exception");
-    }
-  }
-}
-
 TEST_CASE("Error Comparison") {
-  const auto err = error::Error("unknown error");
+  const auto err = error::make("unknown error");
   const auto err_copy = err;
   CHECK(err == err_copy);
   CHECK_FALSE(err != err_copy);
-  const auto other_err = error::Error("other error");
+  const auto other_err = error::make("other error");
   CHECK_FALSE(err == other_err);
   CHECK(err != other_err);
 }
 
 TEST_CASE("Error Printing") {
-  const error::Error err("unknown error");
+  const auto err = error::make("unknown error");
 
   SECTION("Using ostream") {
     const auto ss = std::stringstream() << err;

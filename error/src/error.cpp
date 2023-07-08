@@ -2,15 +2,11 @@
 
 namespace error {
 
-Error::Error(const std::string& msg) : message(msg) {}
-
 std::ostream& operator<<(std::ostream& os, const error::Error& err) {
-  return os << "error: " << err.what();
+  return os << "error: " << err.message;
 }
 
-const char* Error::what() const noexcept { return message.c_str(); }
-
-Error make(const std::string& msg) { return Error(msg); }
+Error make(const std::string& msg) { return Error{.message = msg}; }
 
 bool operator==(const Error& lhs, const Error& rhs) {
   return lhs.message == rhs.message;
@@ -31,7 +27,7 @@ format_parse_context::iterator formatter<error::Error>::parse(
 
 format_context::iterator formatter<error::Error>::format(
     const error::Error& err, format_context& ctx) const {
-  return format_to(ctx.out(), "error: {}", err.what());
+  return format_to(ctx.out(), "error: {}", err.message);
 }
 
 }  // namespace fmt
