@@ -98,18 +98,12 @@ jobs:
 
   docs:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        package: [error]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3.5.3
 
-      - name: Configure project
-        uses: threeal/cmake-action@v1.2.0
-        with:
-          source-dir: ${{ matrix.package }}
-          options: BUILD_DOCS=ON
+      - name: Install dependencies
+        run: pip3 install -r docs/requirements.txt
 
       - name: Build documentation
-        run: cmake --build ${{ matrix.package }}/build --target docs
+        run: sphinx-build -b html docs build/docs -W --keep-going
