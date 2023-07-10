@@ -1,0 +1,39 @@
+name: deploy
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.5.3
+
+      - name: Install requirements
+        run: pip3 install -r docs/requirements.txt
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3.0.6
+
+      - name: Build with Sphinx
+        run: sphinx-build -b html docs docs/build -W --keep-going
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1.0.8
+        with:
+          path: docs/build
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2.0.2
