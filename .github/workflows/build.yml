@@ -95,3 +95,23 @@ jobs:
           source-dir: ${{ matrix.package }}
           cxx-compiler: cl
           run-build: true
+
+  docs:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: [error]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3.5.3
+
+      - name: Install requirements
+        run: |
+          sudo apt-get install -y doxygen
+
+      - name: Configure and build documentation
+        uses: threeal/cmake-action@v1.2.0
+        with:
+          source-dir: ${{ matrix.package }}
+          options: BUILD_DOCS=ON
+          run-build: true
