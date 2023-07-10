@@ -1,5 +1,21 @@
-# A function that generates XML documentation from the specified target.
+# A function that generates XML documentation for the specified target.
 function(target_generate_xml_docs TARGET)
+  # Try to install Doxygen if not found
+  find_program(DOXYGEN_PROGRAM doxygen)
+  if(NOT DOXYGEN_PROGRAM)
+    find_program(APT_GET_PROGRAM apt-get)
+    if(APT_GET_PROGRAM)
+      message(STATUS "Doxygen could not be found, installing...")
+      execute_process(COMMAND ${APT_GET_PROGRAM} install -y doxygen)
+    endif()
+
+    find_program(BREW_PROGRAM brew)
+    if(BREW_PROGRAM)
+      message(STATUS "Doxygen could not be found, installing...")
+      execute_process(COMMAND ${BREW_PROGRAM} install doxygen)
+    endif()
+  endif()
+
   # Try to find Doxygen
   find_package(Doxygen)
   if(DOXYGEN_FOUND)
@@ -25,7 +41,5 @@ function(target_generate_xml_docs TARGET)
     # Generate XML documentation for the target
     doxygen_add_docs(${TARGET}_docs ${HEADER_FILES} USE_STAMP_FILE)
     add_dependencies(${TARGET} ${TARGET}_docs)
-  else()
-    message(WARNING "Could not found Doxygen!")
   endif()
 endfunction()
