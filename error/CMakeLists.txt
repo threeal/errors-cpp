@@ -17,6 +17,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   option(CHECK_FORMAT "Enable source code formatting check" OFF)
   option(CHECK_WARNING "Enable static analysis warning check" OFF)
   option(CHECK_COVERAGE "Enable test coverage check" OFF)
+  option(BUILD_DOCS "Enable documentations build" OFF)
 
   # Import Format.cmake to format source code
   if(CHECK_FORMAT)
@@ -56,4 +57,10 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
       target_link_options(${TARGET} PRIVATE --coverage)
     endif()
   endforeach()
+
+  # Build XML documentation
+  if(BUILD_DOCS)
+    include(cmake/add_xml_docs.cmake)
+    add_xml_docs(error_docs include)
+  endif()
 endif()
