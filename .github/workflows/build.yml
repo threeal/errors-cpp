@@ -105,9 +105,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3.5.3
 
-      - name: Configure and build documentation
+      - name: Configure project
         uses: threeal/cmake-action@v1.2.0
         with:
           source-dir: ${{ matrix.package }}
           options: BUILD_DOCS=ON
-          run-build: true
+
+      - name: Build documentation
+        run: cmake --build ${{ matrix.package }}/build --target docs
