@@ -9,3 +9,11 @@ A comprehensive collection of `C++`_ utility packages.
 .. _build_status_badge: https://github.com/threeal/cpp/actions/workflows/build.yml
 
 .. _C++: https://isocpp.org
+
+Packages
+--------
+
+.. toctree::
+   :maxdepth: 1
+
+   error/index.rst
