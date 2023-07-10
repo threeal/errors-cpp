@@ -2,6 +2,5 @@
 !.clang*
 !.cmake*
 !.git*
-!.readthedocs*
 
 build
