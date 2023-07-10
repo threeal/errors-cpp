@@ -60,7 +60,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 
   # Build XML documentation
   if(BUILD_DOCS)
-    include(cmake/add_xml_docs.cmake)
-    add_xml_docs(error_docs include)
+    include(cmake/target_generate_xml_docs.cmake)
+    target_generate_xml_docs(error)
   endif()
 endif()
