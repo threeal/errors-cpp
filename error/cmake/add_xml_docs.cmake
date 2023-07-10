@@ -6,7 +6,7 @@ function(add_xml_docs TARGET_NAME)
     find_program(APT_GET_PROGRAM apt-get)
     if(APT_GET_PROGRAM)
       message(STATUS "Doxygen could not be found, installing...")
-      execute_process(COMMAND ${APT_GET_PROGRAM} install -y doxygen)
+      execute_process(COMMAND sudo ${APT_GET_PROGRAM} install -y doxygen)
     endif()
 
     find_program(BREW_PROGRAM brew)
