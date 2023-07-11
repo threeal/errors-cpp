@@ -33,6 +33,40 @@ struct Error {
    * @endcode
    */
   friend std::ostream& operator<<(std::ostream& os, const error::Error& err);
+
+  /**
+   * @brief Checks if two error objects are equal.
+   * @param lhs The left-hand side error object.
+   * @param rhs The right-hand side error object.
+   * @return True if equal, false otherwise.
+   *
+   * This operator allows the comparison of two error objects using the == operator.
+   *
+   * @code{.cpp}
+   * const auto err = error::make("unknown error");
+   * const auto other_err = err;
+   *
+   * assert(err == other_err);
+   * @endcode
+   */
+  friend bool operator==(const Error& lhs, const Error& rhs);
+
+  /**
+   * @brief Checks if two error objects are not equal.
+   * @param lhs The left-hand side error object.
+   * @param rhs The right-hand side error object.
+   * @return True if not equal, false otherwise.
+   *
+   * This operator allows the comparison of two error objects using the != operator.
+   *
+   * @code{.cpp}
+   * const auto err = error::make("unknown error");
+   * const auto other_err = error::make("other error");
+   *
+   * assert(err != other_err);
+   * @endcode
+   */
+  friend bool operator!=(const Error& lhs, const Error& rhs);
 };
 
 /**
@@ -53,22 +87,6 @@ template <typename... T>
 Error format(fmt::format_string<T...> fmt, T&&... args) {
   return error::make(fmt::format(fmt, std::forward<T>(args)...));
 }
-
-/**
- * @brief Checks if two error objects are equal.
- * @param lhs The left-hand side error object.
- * @param rhs The right-hand side error object.
- * @return True if equal, false otherwise.
- */
-bool operator==(const Error& lhs, const Error& rhs);
-
-/**
- * @brief Checks if two error objects are not equal.
- * @param lhs The left-hand side error object.
- * @param rhs The right-hand side error object.
- * @return True if not equal, false otherwise.
- */
-bool operator!=(const Error& lhs, const Error& rhs);
 
 }  // namespace error
 

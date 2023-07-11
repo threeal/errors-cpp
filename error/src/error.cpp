@@ -6,8 +6,6 @@ std::ostream& operator<<(std::ostream& os, const error::Error& err) {
   return os << "error: " << err.message;
 }
 
-Error make(const std::string& msg) { return Error{.message = msg}; }
-
 bool operator==(const Error& lhs, const Error& rhs) {
   return lhs.message == rhs.message;
 }
@@ -15,6 +13,8 @@ bool operator==(const Error& lhs, const Error& rhs) {
 bool operator!=(const Error& lhs, const Error& rhs) {
   return lhs.message != rhs.message;
 }
+
+Error make(const std::string& msg) { return Error{.message = msg}; }
 
 }  // namespace error
 
