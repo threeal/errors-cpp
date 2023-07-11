@@ -21,6 +21,13 @@ License
 -------
 
 .. image:: https://opensource.org/wp-content/uploads/2022/10/osi-badge-dark.svg
+   :class: only-light
+   :width: 150
+   :align: right
+   :target: https://opensource.org/licenses
+
+.. image:: https://opensource.org/wp-content/uploads/2022/10/osi-badge-light.svg
+   :class: only-dark
    :width: 150
    :align: right
    :target: https://opensource.org/licenses
