@@ -99,17 +99,16 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v3.5.3
 
-      - name: Install dependencies
+      - name: Install requirements
         run: pip3 install -r docs/requirements.txt
 
-      - name: Build documentation
+      - name: Build with Sphinx
         run: sphinx-build -b html docs build/docs -W --keep-going
 
-      - name: Upload documentation as artifact
-        uses: actions/upload-artifact@v3.1.2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1.0.8
         with:
-          name: docs
           path: build/docs
