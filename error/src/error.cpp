@@ -10,11 +10,11 @@ bool operator==(const Error& lhs, const Error& rhs) {
   return lhs.message == rhs.message;
 }
 
-Error make(const std::string& msg) { return Error{.message = msg}; }
-
 bool operator!=(const Error& lhs, const Error& rhs) {
   return lhs.message != rhs.message;
 }
+
+Error make(const std::string& msg) { return Error{.message = msg}; }
 
 }  // namespace error
 
