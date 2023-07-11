@@ -13,8 +13,6 @@ API Docs
 .. doxygenstruct:: error::Error
    :members:
 
-.. doxygenfunction:: error::operator==
-
 .. doxygenfunction:: error::operator!=
 
 License
