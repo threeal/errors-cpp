@@ -12,5 +12,5 @@ subprocess.call('cmake --build ../error/build --target docs', shell=True)
 breathe_projects = {"error": "../error/build/docs"}
 breathe_default_project = "error"
 
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'furo'
 html_static_path = ['_static']
