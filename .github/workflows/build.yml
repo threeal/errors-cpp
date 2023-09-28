@@ -13,7 +13,7 @@ jobs:
         package: [error]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.0.0
+        uses: actions/checkout@v4.1.0
 
       - name: Configure CMake
         run: |
@@ -49,7 +49,7 @@ jobs:
         package: [error]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.0.0
+        uses: actions/checkout@v4.1.0
 
       - name: Configure CMake
         run: |
@@ -72,7 +72,7 @@ jobs:
         package: [error]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.0.0
+        uses: actions/checkout@v4.1.0
 
       - name: Configure and build project
         uses: threeal/cmake-action@v1.3.0
@@ -87,7 +87,7 @@ jobs:
         package: [error]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.0.0
+        uses: actions/checkout@v4.1.0
 
       - name: Configure and build project
         uses: threeal/cmake-action@v1.3.0
@@ -100,7 +100,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.0.0
+        uses: actions/checkout@v4.1.0
 
       - name: Install requirements
         run: pip3 install -r docs/requirements.txt
