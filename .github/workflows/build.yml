@@ -16,8 +16,7 @@ jobs:
         run: |
           cmake . \
             -B build \
-            -D BUILD_TESTING=ON \
-            -D CHECK_COVERAGE=ON
+            -D BUILD_TESTING=ON
 
       - name: Build project
         run: cmake --build build
