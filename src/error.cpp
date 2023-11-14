@@ -1,4 +1,4 @@
-#include <error/error.hpp>
+#include <errors/error.hpp>
 
 namespace error {
 

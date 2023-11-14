@@ -1,7 +1,7 @@
 #include <fmt/core.h>
 
 #include <catch2/catch_test_macros.hpp>
-#include <error/error.hpp>
+#include <errors/error.hpp>
 #include <sstream>
 #include <string>
 
