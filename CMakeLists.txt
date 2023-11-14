@@ -1,16 +1,16 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(error)
+project(errors)
 
 # Import dependencies
 include(cmake/CPM.cmake)
 cpmaddpackage("gh:fmtlib/fmt#10.0.0")
 
 # Build the main library
-add_library(error src/error.cpp)
-target_include_directories(error PUBLIC include)
-target_link_libraries(error PUBLIC fmt)
-target_compile_features(error PRIVATE cxx_std_20)
+add_library(errors src/error.cpp)
+target_include_directories(errors PUBLIC include)
+target_link_libraries(errors PUBLIC fmt)
+target_compile_features(errors PRIVATE cxx_std_20)
 
 # Check if this project is the main project
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
@@ -22,7 +22,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   # Import Format.cmake to format source code
   if(CHECK_FORMAT)
     cpmaddpackage("gh:threeal/Format.cmake#auto-install-cmake-format")
-    add_dependencies(error fix-format)
+    add_dependencies(errors fix-format)
   endif()
 
   if(BUILD_TESTING)
@@ -33,9 +33,9 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     include("${Catch2_SOURCE_DIR}/extras/Catch.cmake")
 
     # Build tests for the main library
-    add_executable(error_test test/error_test.cpp)
-    target_link_libraries(error_test PRIVATE error Catch2::Catch2WithMain)
-    catch_discover_tests(error_test)
+    add_executable(errors_test test/error_test.cpp)
+    target_link_libraries(errors_test PRIVATE errors Catch2::Catch2WithMain)
+    catch_discover_tests(errors_test)
   endif()
 
   # Get all targets in this directory

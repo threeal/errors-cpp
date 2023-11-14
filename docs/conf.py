@@ -9,8 +9,8 @@ extensions = ['breathe']
 subprocess.call('cmake .. -B ../build -D BUILD_DOCS=ON', shell=True)
 subprocess.call('cmake --build ../build --target docs', shell=True)
 
-breathe_projects = {"error": "../build/docs"}
-breathe_default_project = "error"
+breathe_projects = {"errors": "../build/docs"}
+breathe_default_project = "errors"
 
 html_theme = 'furo'
 html_static_path = ['_static']
