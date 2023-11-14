@@ -16,10 +16,12 @@ jobs:
         run: |
           cmake . \
             -B build \
-            -D BUILD_TESTING=ON \
-            -D CHECK_FORMAT=ON \
-            -D CHECK_WARNING=ON \
-            -D CHECK_COVERAGE=ON
+            -D BUILD_TESTING=ON
+
+      - name: Check formatting
+        run: |
+          cmake --build build --target fix-format
+          git diff --exit-code HEAD
 
       - name: Build project
         run: cmake --build build
@@ -49,8 +51,7 @@ jobs:
           cmake . `
             -B build `
             -D CMAKE_CXX_COMPILER=cl `
-            -D BUILD_TESTING=ON `
-            -D CHECK_WARNING=ON
+            -D BUILD_TESTING=ON
 
       - name: Build project
         run: cmake --build build

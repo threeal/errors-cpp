@@ -14,16 +14,10 @@ target_compile_features(errors PRIVATE cxx_std_20)
 
 # Check if this project is the main project
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
-  option(CHECK_FORMAT "Enable source code formatting check" OFF)
-  option(CHECK_WARNING "Enable static analysis warning check" OFF)
-  option(CHECK_COVERAGE "Enable test coverage check" OFF)
   option(BUILD_DOCS "Enable documentations build" OFF)
 
   # Import Format.cmake to format source code
-  if(CHECK_FORMAT)
-    cpmaddpackage("gh:threeal/Format.cmake#auto-install-cmake-format")
-    add_dependencies(errors fix-format)
-  endif()
+  cpmaddpackage("gh:threeal/Format.cmake#auto-install-cmake-format")
 
   if(BUILD_TESTING)
     enable_testing()
@@ -43,16 +37,14 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 
   foreach(TARGET IN LISTS TARGETS)
     # Statically analyze code by checking for warnings
-    if(CHECK_WARNING)
-      if(MSVC)
-        target_compile_options(${TARGET} PRIVATE /WX /permissive- /W4 /w14640 /EHsc)
-      else()
-        target_compile_options(${TARGET} PRIVATE -Werror -Wall -Wextra -Wnon-virtual-dtor -Wpedantic)
-      endif()
+    if(MSVC)
+      target_compile_options(${TARGET} PRIVATE /WX /permissive- /W4 /w14640 /EHsc)
+    else()
+      target_compile_options(${TARGET} PRIVATE -Werror -Wall -Wextra -Wnon-virtual-dtor -Wpedantic)
     endif()
 
     # Enable support to check for test coverage
-    if(BUILD_TESTING AND CHECK_COVERAGE AND NOT MSVC)
+    if(BUILD_TESTING AND NOT MSVC)
       target_compile_options(${TARGET} PRIVATE --coverage -O0)
       target_link_options(${TARGET} PRIVATE --coverage)
     endif()
