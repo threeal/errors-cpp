@@ -17,7 +17,6 @@ jobs:
           cmake . \
             -B build \
             -D BUILD_TESTING=ON \
-            -D CHECK_FORMAT=ON \
             -D CHECK_WARNING=ON \
             -D CHECK_COVERAGE=ON
 

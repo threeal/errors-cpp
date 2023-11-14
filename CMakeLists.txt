@@ -14,16 +14,13 @@ target_compile_features(errors PRIVATE cxx_std_20)
 
 # Check if this project is the main project
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
-  option(CHECK_FORMAT "Enable source code formatting check" OFF)
   option(CHECK_WARNING "Enable static analysis warning check" OFF)
   option(CHECK_COVERAGE "Enable test coverage check" OFF)
   option(BUILD_DOCS "Enable documentations build" OFF)
 
   # Import Format.cmake to format source code
-  if(CHECK_FORMAT)
-    cpmaddpackage("gh:threeal/Format.cmake#auto-install-cmake-format")
-    add_dependencies(errors fix-format)
-  endif()
+  cpmaddpackage("gh:threeal/Format.cmake#auto-install-cmake-format")
+  add_dependencies(errors fix-format)
 
   if(BUILD_TESTING)
     enable_testing()
