@@ -18,6 +18,11 @@ jobs:
             -B build \
             -D BUILD_TESTING=ON
 
+      - name: Check formatting
+        run: |
+          cmake --build build --target fix-format
+          git diff --exit-code HEAD
+
       - name: Build project
         run: cmake --build build
 
