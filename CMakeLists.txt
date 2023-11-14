@@ -14,7 +14,6 @@ target_compile_features(errors PRIVATE cxx_std_20)
 
 # Check if this project is the main project
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
-  option(CHECK_WARNING "Enable static analysis warning check" OFF)
   option(CHECK_COVERAGE "Enable test coverage check" OFF)
   option(BUILD_DOCS "Enable documentations build" OFF)
 
@@ -40,12 +39,10 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 
   foreach(TARGET IN LISTS TARGETS)
     # Statically analyze code by checking for warnings
-    if(CHECK_WARNING)
-      if(MSVC)
-        target_compile_options(${TARGET} PRIVATE /WX /permissive- /W4 /w14640 /EHsc)
-      else()
-        target_compile_options(${TARGET} PRIVATE -Werror -Wall -Wextra -Wnon-virtual-dtor -Wpedantic)
-      endif()
+    if(MSVC)
+      target_compile_options(${TARGET} PRIVATE /WX /permissive- /W4 /w14640 /EHsc)
+    else()
+      target_compile_options(${TARGET} PRIVATE -Werror -Wall -Wextra -Wnon-virtual-dtor -Wpedantic)
     endif()
 
     # Enable support to check for test coverage

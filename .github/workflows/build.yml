@@ -17,7 +17,6 @@ jobs:
           cmake . \
             -B build \
             -D BUILD_TESTING=ON \
-            -D CHECK_WARNING=ON \
             -D CHECK_COVERAGE=ON
 
       - name: Build project
@@ -48,8 +47,7 @@ jobs:
           cmake . `
             -B build `
             -D CMAKE_CXX_COMPILER=cl `
-            -D BUILD_TESTING=ON `
-            -D CHECK_WARNING=ON
+            -D BUILD_TESTING=ON
 
       - name: Build project
         run: cmake --build build
