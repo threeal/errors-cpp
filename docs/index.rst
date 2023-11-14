@@ -1,17 +1,19 @@
-Overview
-========
+Errors C++
+=============
 
-A comprehensive collection of `C++`_ utility packages.
+A `C++`_ package that provides utilities for error handling.
 
 .. _C++: https://isocpp.org
 
-Packages
+API Docs
 --------
 
-.. toctree::
-   :maxdepth: 1
+.. doxygenfunction:: error::make
 
-   error/index.rst
+.. doxygenfunction:: error::format
+
+.. doxygenstruct:: error::Error
+   :members:
 
 License
 -------
