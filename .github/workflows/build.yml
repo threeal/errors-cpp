@@ -8,35 +8,31 @@ on:
 jobs:
   debug:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        package: [error]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.1.1
 
       - name: Configure CMake
         run: |
-          cmake ${{ matrix.package }} \
-            -B ${{ matrix.package }}/build \
+          cmake . \
+            -B build \
             -D BUILD_TESTING=ON \
             -D CHECK_FORMAT=ON \
             -D CHECK_WARNING=ON \
             -D CHECK_COVERAGE=ON
 
       - name: Build project
-        run: cmake --build ${{ matrix.package }}/build
+        run: cmake --build build
 
       - name: Run unit tests
-        run: ctest --test-dir ${{ matrix.package }}/build --output-on-failure --no-tests=error
+        run: ctest --test-dir build --output-on-failure --no-tests=error
 
       - name: Check code coverage
         uses: threeal/gcovr-action@main
         with:
-          root: ${{ matrix.package }}
           excludes: |
-            ${{ matrix.package }}/build/*
-            ${{ matrix.package }}/test/*
+            build/*
+            test/*
           fail-under-line: 100
 
       - name: Check diff
@@ -44,32 +40,26 @@ jobs:
 
   debug-msvc:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        package: [error]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.1.1
 
       - name: Configure CMake
         run: |
-          cmake ${{ matrix.package }} `
-            -B ${{ matrix.package }}/build `
+          cmake . `
+            -B build `
             -D CMAKE_CXX_COMPILER=cl `
             -D BUILD_TESTING=ON `
             -D CHECK_WARNING=ON
 
       - name: Build project
-        run: cmake --build ${{ matrix.package }}/build
+        run: cmake --build build
 
       - name: Run unit tests
-        run: ctest --test-dir ${{ matrix.package }}/build --output-on-failure --no-tests=error
+        run: ctest --test-dir build --output-on-failure --no-tests=error
 
   release:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        package: [error]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.1.1
@@ -77,14 +67,10 @@ jobs:
       - name: Configure and build project
         uses: threeal/cmake-action@v1.3.0
         with:
-          source-dir: ${{ matrix.package }}
           run-build: true
 
   release-msvc:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        package: [error]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.1.1
@@ -92,7 +78,6 @@ jobs:
       - name: Configure and build project
         uses: threeal/cmake-action@v1.3.0
         with:
-          source-dir: ${{ matrix.package }}
           cxx-compiler: cl
           run-build: true
 
