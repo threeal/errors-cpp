@@ -35,13 +35,10 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   # Get all targets in this directory
   get_property(TARGETS DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY BUILDSYSTEM_TARGETS)
 
+  cpmaddpackage(gh:threeal/CheckWarning.cmake@1.1.0)
   foreach(TARGET IN LISTS TARGETS)
     # Statically analyze code by checking for warnings
-    if(MSVC)
-      target_compile_options(${TARGET} PRIVATE /WX /permissive- /W4 /w14640 /EHsc)
-    else()
-      target_compile_options(${TARGET} PRIVATE -Werror -Wall -Wextra -Wnon-virtual-dtor -Wpedantic)
-    endif()
+    target_check_warning(${TARGET})
 
     # Enable support to check for test coverage
     if(BUILD_TESTING AND NOT MSVC)
