@@ -23,7 +23,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     enable_testing()
 
     # Import Catch2 as the main testing framework
-    cpmaddpackage("gh:catchorg/Catch2@3.4.0")
+    cpmaddpackage("gh:catchorg/Catch2@3.5.0")
     include("${Catch2_SOURCE_DIR}/extras/Catch.cmake")
 
     # Build tests for the main library
