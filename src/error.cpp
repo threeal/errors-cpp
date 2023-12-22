@@ -1,8 +1,8 @@
 #include <errors/error.hpp>
 
-namespace error {
+namespace errors {
 
-std::ostream& operator<<(std::ostream& os, const error::Error& err) {
+std::ostream& operator<<(std::ostream& os, const errors::Error& err) {
   return os << "error: " << err.message;
 }
 
@@ -20,13 +20,13 @@ Error make(const std::string& msg) { return Error{.message = msg}; }
 
 namespace fmt {
 
-format_parse_context::iterator formatter<error::Error>::parse(
+format_parse_context::iterator formatter<errors::Error>::parse(
     format_parse_context& ctx) const {
   return ctx.begin();
 }
 
-format_context::iterator formatter<error::Error>::format(
-    const error::Error& err, format_context& ctx) const {
+format_context::iterator formatter<errors::Error>::format(
+    const errors::Error& err, format_context& ctx) const {
   return format_to(ctx.out(), "error: {}", err.message);
 }
 
