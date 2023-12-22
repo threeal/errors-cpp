@@ -30,9 +30,24 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     cpmaddpackage("gh:catchorg/Catch2@3.5.0")
     include("${Catch2_SOURCE_DIR}/extras/Catch.cmake")
 
+    # Append the main library properties instead of linking the library.
+    get_target_property(errors_SOURCES errors SOURCES)
+    get_target_property(errors_INCLUDES errors INCLUDE_DIRECTORIES)
+    get_target_property(errors_LIBRARIES errors LINK_LIBRARIES)
+    get_target_property(errors_FEATURES errors COMPILE_FEATURES)
+
     # Build tests for the main library
-    add_executable(errors_test test/error_test.cpp)
-    target_link_libraries(errors_test PRIVATE errors Catch2::Catch2WithMain)
+    add_executable(errors_test test/error_test.cpp ${errors_SOURCES})
+    target_include_directories(errors_test PRIVATE ${errors_INCLUDES})
+    target_link_libraries(errors_test PRIVATE Catch2::Catch2WithMain ${errors_LIBRARIES})
+    target_compile_features(errors_test PRIVATE ${errors_FEATURES})
+
+    # Enable support to check for test coverage
+    if(NOT MSVC)
+      target_compile_options(errors_test PRIVATE --coverage -O0)
+      target_link_options(errors_test PRIVATE --coverage)
+    endif()
+
     catch_discover_tests(errors_test)
   endif()
 
@@ -43,12 +58,6 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   foreach(TARGET IN LISTS TARGETS)
     # Statically analyze code by checking for warnings
     target_check_warning(${TARGET})
-
-    # Enable support to check for test coverage
-    if(BUILD_TESTING AND NOT MSVC)
-      target_compile_options(${TARGET} PRIVATE --coverage -O0)
-      target_link_options(${TARGET} PRIVATE --coverage)
-    endif()
   endforeach()
 
   # Build XML documentation
