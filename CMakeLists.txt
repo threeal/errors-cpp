@@ -54,7 +54,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   # Get all targets in this directory
   get_property(TARGETS DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY BUILDSYSTEM_TARGETS)
 
-  cpmaddpackage(gh:threeal/CheckWarning.cmake@1.1.0)
+  cpmaddpackage(gh:threeal/CheckWarning.cmake@2.0.1)
   foreach(TARGET IN LISTS TARGETS)
     # Statically analyze code by checking for warnings
     target_check_warning(${TARGET})
