@@ -17,7 +17,11 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   option(BUILD_DOCS "Enable documentations build" OFF)
 
   # Import Format.cmake to format source code
-  cpmaddpackage("gh:threeal/Format.cmake#auto-install-cmake-format")
+  cpmaddpackage(
+    GITHUB_REPOSITORY threeal/Format.cmake
+    GIT_TAG auto-install-cmake-format
+    OPTIONS "FORMAT_SKIP_CMAKE ON"
+  )
 
   if(BUILD_TESTING)
     enable_testing()
