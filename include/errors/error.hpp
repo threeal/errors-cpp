@@ -6,7 +6,7 @@
 #include <string>
 #include <utility>
 
-namespace error {
+namespace errors {
 
 /**
  * @brief Represents error information.
@@ -26,13 +26,13 @@ struct Error {
    * stream.
    *
    * @code{.cpp}
-   * const auto err = error::make("unknown error");
+   * const auto err = errors::make("unknown error");
    *
    * // Print "error: unknown error"
    * std::cout << err << std::endl;
    * @endcode
    */
-  friend std::ostream& operator<<(std::ostream& os, const error::Error& err);
+  friend std::ostream& operator<<(std::ostream& os, const errors::Error& err);
 
   /**
    * @brief Checks if two error objects are equal.
@@ -43,7 +43,7 @@ struct Error {
    * This operator allows the comparison of two error objects using the == operator.
    *
    * @code{.cpp}
-   * const auto err = error::make("unknown error");
+   * const auto err = errors::make("unknown error");
    * const auto other_err = err;
    *
    * assert(err == other_err);
@@ -60,8 +60,8 @@ struct Error {
    * This operator allows the comparison of two error objects using the != operator.
    *
    * @code{.cpp}
-   * const auto err = error::make("unknown error");
-   * const auto other_err = error::make("other error");
+   * const auto err = errors::make("unknown error");
+   * const auto other_err = errors::make("other error");
    *
    * assert(err != other_err);
    * @endcode
@@ -85,14 +85,14 @@ Error make(const std::string& msg);
  */
 template <typename... T>
 Error format(fmt::format_string<T...> fmt, T&&... args) {
-  return error::make(fmt::format(fmt, std::forward<T>(args)...));
+  return errors::make(fmt::format(fmt, std::forward<T>(args)...));
 }
 
 }  // namespace error
 
 template <>
-struct fmt::formatter<error::Error> {
+struct fmt::formatter<errors::Error> {
   format_parse_context::iterator parse(format_parse_context& ctx) const;
-  format_context::iterator format(const error::Error& err,
+  format_context::iterator format(const errors::Error& err,
                                   format_context& ctx) const;
 };
