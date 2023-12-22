@@ -16,6 +16,10 @@ target_compile_features(errors PRIVATE cxx_std_20)
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   option(BUILD_DOCS "Enable documentations build" OFF)
 
+  # Statically analyze code by checking for warnings
+  cpmaddpackage(gh:threeal/CheckWarning.cmake@2.0.1)
+  add_check_warning()
+
   # Import Format.cmake to format source code
   cpmaddpackage(
     GITHUB_REPOSITORY TheLartians/Format.cmake
@@ -50,15 +54,6 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 
     catch_discover_tests(errors_test)
   endif()
-
-  # Get all targets in this directory
-  get_property(TARGETS DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY BUILDSYSTEM_TARGETS)
-
-  cpmaddpackage(gh:threeal/CheckWarning.cmake@2.0.1)
-  foreach(TARGET IN LISTS TARGETS)
-    # Statically analyze code by checking for warnings
-    target_check_warning(${TARGET})
-  endforeach()
 
   # Build XML documentation
   if(BUILD_DOCS)
