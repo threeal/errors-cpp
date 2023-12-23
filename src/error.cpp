@@ -2,20 +2,25 @@
 
 namespace errors {
 
+std::string Error::message() const {
+  if (!message_ptr) return "no error";
+  return *message_ptr;
+}
+
 std::ostream& operator<<(std::ostream& os, const errors::Error& err) {
-  return os << "error: " << *err.message;
+  return os << "error: " << err.message();
 }
 
 bool operator==(const Error& lhs, const Error& rhs) {
-  return *lhs.message == *rhs.message;
+  return lhs.message() == rhs.message();
 }
 
 bool operator!=(const Error& lhs, const Error& rhs) {
-  return *lhs.message != *rhs.message;
+  return lhs.message() != rhs.message();
 }
 
 Error make(const std::string& msg) {
-  return Error{.message = std::make_shared<const std::string>(msg)};
+  return Error{.message_ptr = std::make_shared<const std::string>(msg)};
 }
 
 }  // namespace error
@@ -29,7 +34,7 @@ format_parse_context::iterator formatter<errors::Error>::parse(
 
 format_context::iterator formatter<errors::Error>::format(
     const errors::Error& err, format_context& ctx) const {
-  return format_to(ctx.out(), "error: {}", *err.message);
+  return format_to(ctx.out(), "error: {}", err.message());
 }
 
 }  // namespace fmt

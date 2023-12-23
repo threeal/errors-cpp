@@ -15,7 +15,19 @@ namespace errors {
 class Error {
  public:
   /** The shared pointer of the error message. */
-  const std::shared_ptr<const std::string> message;
+  const std::shared_ptr<const std::string> message_ptr;
+
+  /**
+   * @brief Returns the error message.
+   *
+   * @code{.cpp}
+   * const auto err = errors::make("unknown error");
+   *
+   * // Print "unknown error"
+   * std::cout << err << std::endl;
+   * @endcode
+   */
+  std::string message() const;
 
   /**
    * @brief Writes the string representation of an error object to the given
