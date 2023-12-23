@@ -17,6 +17,8 @@ class Error {
   /** The shared pointer of the error message. */
   const std::shared_ptr<const std::string> message_ptr;
 
+  Error(const std::shared_ptr<const std::string>& message_ptr);
+
   /**
    * @brief Returns the error message.
    *
