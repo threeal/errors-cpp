@@ -12,7 +12,7 @@ API Docs
 
 .. doxygenfunction:: errors::format
 
-.. doxygenstruct:: errors::Error
+.. doxygenclass:: errors::Error
    :members:
 
 License
