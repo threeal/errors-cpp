@@ -13,10 +13,10 @@ namespace errors {
  * @brief Represents error information.
  */
 class Error {
- public:
-  /** The shared pointer of the error message. */
+ private:
   const std::shared_ptr<const std::string> message_ptr;
 
+ public:
   Error(const std::shared_ptr<const std::string>& message_ptr);
 
   /**
