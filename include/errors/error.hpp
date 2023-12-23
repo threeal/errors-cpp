@@ -2,6 +2,7 @@
 
 #include <fmt/core.h>
 
+#include <memory>
 #include <ostream>
 #include <string>
 #include <utility>
@@ -13,7 +14,8 @@ namespace errors {
  */
 class Error {
  public:
-  const std::string message; /**< The error message. */
+  /** The shared pointer of the error message. */
+  const std::shared_ptr<const std::string> message;
 
   /**
    * @brief Writes the string representation of an error object to the given
