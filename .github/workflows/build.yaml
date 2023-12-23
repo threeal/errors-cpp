@@ -1,0 +1,41 @@
+name: Build
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  build-project:
+    name: Build Project
+    runs-on: ${{ matrix.os }}-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu, windows]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: Configure Project
+        uses: threeal/cmake-action@v1.3.0
+
+      - name: Build Project
+        run: cmake --build build --config Release
+
+  build-docs:
+    name: Build Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: Install Requirements
+        run: pip3 install -r docs/requirements.txt
+
+      - name: Build Documentation
+        run: sphinx-build -b html docs build/docs -W --keep-going
+
+      - name: Upload Documentation
+        uses: actions/upload-pages-artifact@v3.0.0
+        with:
+          path: build/docs
