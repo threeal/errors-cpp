@@ -11,7 +11,8 @@ namespace errors {
 /**
  * @brief Represents error information.
  */
-struct Error {
+class Error {
+ public:
   const std::string message; /**< The error message. */
 
   /**
