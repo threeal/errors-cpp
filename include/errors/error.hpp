@@ -31,6 +31,8 @@ class Error {
    */
   std::string message() const;
 
+  friend Error make(const std::string& msg);
+
   /**
    * @brief Writes the string representation of an error object to the given
    * output stream.
