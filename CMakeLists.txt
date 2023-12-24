@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.12)
 
 project(errors)
 
+if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  set(NOT_SUBPROJECT TRUE)
+endif()
+
 # Initialize CPM.cmake
 include(cmake/CPM.cmake)
 
@@ -10,7 +14,7 @@ add_library(errors src/error.cpp)
 target_include_directories(errors PUBLIC include)
 
 # Check if this project is the main project
-if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+if(NOT_SUBPROJECT)
   option(BUILD_DOCS "Enable documentations build" OFF)
 
   # Statically analyze code by checking for warnings

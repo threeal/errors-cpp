@@ -5,7 +5,7 @@ target_include_directories(errors_format PUBLIC include)
 target_link_libraries(errors_format PUBLIC errors fmt)
 target_compile_features(errors_format PRIVATE cxx_std_20)
 
-if(BUILD_TESTING)
+if(NOT_SUBPROJECT AND BUILD_TESTING)
   # Append the main library properties instead of linking the library.
   get_target_property(errors_format_SOURCES errors_format SOURCES)
   get_target_property(errors_format_INCLUDES errors_format INCLUDE_DIRECTORIES)
