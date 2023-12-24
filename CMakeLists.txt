@@ -48,7 +48,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 
     # Enable support to check for test coverage
     if(NOT MSVC)
-      target_compile_options(errors_test PRIVATE --coverage -O0)
+      target_compile_options(errors_test PRIVATE --coverage -O0 -fno-exceptions)
       target_link_options(errors_test PRIVATE --coverage)
     endif()
 
