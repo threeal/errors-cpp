@@ -19,9 +19,13 @@ Error format(fmt::format_string<T...> fmt, T&&... args) {
 
 }  // namespace errors
 
+namespace fmt {
+
 template <>
-struct fmt::formatter<errors::Error> {
+struct formatter<errors::Error> {
   format_parse_context::iterator parse(format_parse_context& ctx) const;
   format_context::iterator format(const errors::Error& err,
                                   format_context& ctx) const;
 };
+
+}  // namespace fmt
