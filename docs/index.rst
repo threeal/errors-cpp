@@ -8,10 +8,6 @@ A `C++`_ package that provides utilities for error handling.
 API Docs
 --------
 
-.. doxygenfunction:: errors::make
-
-.. doxygenfunction:: errors::format
-
 .. doxygenclass:: errors::Error
    :members:
 

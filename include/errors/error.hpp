@@ -16,9 +16,9 @@ class Error {
  private:
   const std::shared_ptr<const std::string> message_ptr;
 
- public:
   Error(const std::shared_ptr<const std::string>& message_ptr);
 
+ public:
   /**
    * @brief Returns the error message.
    *
@@ -30,6 +30,11 @@ class Error {
    * @endcode
    */
   std::string message() const;
+
+  friend Error make(const std::string& msg);
+
+  template <typename... T>
+  friend Error format(fmt::format_string<T...> fmt, T&&... args);
 
   /**
    * @brief Writes the string representation of an error object to the given
