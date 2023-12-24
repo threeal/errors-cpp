@@ -16,9 +16,9 @@ class Error {
  private:
   const std::shared_ptr<const std::string> message_ptr;
 
- public:
   Error(const std::shared_ptr<const std::string>& message_ptr);
 
+ public:
   /**
    * @brief Returns the error message.
    *
