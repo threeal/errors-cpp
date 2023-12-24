@@ -50,40 +50,6 @@ class Error {
    * @endcode
    */
   friend std::ostream& operator<<(std::ostream& os, const errors::Error& err);
-
-  /**
-   * @brief Checks if two error objects are equal.
-   * @param lhs The left-hand side error object.
-   * @param rhs The right-hand side error object.
-   * @return True if equal, false otherwise.
-   *
-   * This operator allows the comparison of two error objects using the == operator.
-   *
-   * @code{.cpp}
-   * const auto err = errors::make("unknown error");
-   * const auto other_err = err;
-   *
-   * assert(err == other_err);
-   * @endcode
-   */
-  friend bool operator==(const Error& lhs, const Error& rhs);
-
-  /**
-   * @brief Checks if two error objects are not equal.
-   * @param lhs The left-hand side error object.
-   * @param rhs The right-hand side error object.
-   * @return True if not equal, false otherwise.
-   *
-   * This operator allows the comparison of two error objects using the != operator.
-   *
-   * @code{.cpp}
-   * const auto err = errors::make("unknown error");
-   * const auto other_err = errors::make("other error");
-   *
-   * assert(err != other_err);
-   * @endcode
-   */
-  friend bool operator!=(const Error& lhs, const Error& rhs);
 };
 
 /**
