@@ -33,6 +33,9 @@ class Error {
 
   friend Error make(const std::string& msg);
 
+  template <typename... T>
+  friend Error format(fmt::format_string<T...> fmt, T&&... args);
+
   /**
    * @brief Writes the string representation of an error object to the given
    * output stream.
