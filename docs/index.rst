@@ -9,7 +9,14 @@ API Docs
 --------
 
 .. doxygenclass:: errors::Error
+   :project: errors
    :members:
+
+Format Component
+^^^^^^^^^^^^^^^^
+
+.. doxygenfunction:: errors::format
+   :project: errors_format
 
 License
 -------

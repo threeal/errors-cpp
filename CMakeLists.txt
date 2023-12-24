@@ -56,7 +56,7 @@ if(NOT_SUBPROJECT)
   # Build XML documentation
   if(BUILD_DOCS)
     include(cmake/add_xml_docs.cmake)
-    add_xml_docs(docs include/errors/error.hpp)
+    add_xml_docs(errors_docs include/errors/error.hpp)
   endif()
 endif()
 
