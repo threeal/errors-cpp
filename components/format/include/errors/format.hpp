@@ -13,9 +13,7 @@ namespace errors {
  * @return A new error object.
  */
 template <typename... T>
-Error format(fmt::format_string<T...> fmt, T&&... args) {
-  return errors::make(fmt::format(fmt, std::forward<T>(args)...));
-}
+Error format(fmt::format_string<T...> fmt, T&&... args);
 
 }  // namespace errors
 
@@ -29,3 +27,5 @@ struct formatter<errors::Error> {
 };
 
 }  // namespace fmt
+
+#include "format.ipp"
