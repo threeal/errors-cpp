@@ -13,14 +13,6 @@ std::ostream& operator<<(std::ostream& os, const errors::Error& err) {
   return os << "error: " << err.message();
 }
 
-bool operator==(const Error& lhs, const Error& rhs) {
-  return lhs.message() == rhs.message();
-}
-
-bool operator!=(const Error& lhs, const Error& rhs) {
-  return lhs.message() != rhs.message();
-}
-
 Error make(const std::string& msg) {
   return Error(std::make_shared<const std::string>(msg));
 }
