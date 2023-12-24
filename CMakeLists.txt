@@ -2,15 +2,12 @@ cmake_minimum_required(VERSION 3.12)
 
 project(errors)
 
-# Import dependencies
+# Initialize CPM.cmake
 include(cmake/CPM.cmake)
-cpmaddpackage("gh:fmtlib/fmt#10.0.0")
 
 # Build the main library
 add_library(errors src/error.cpp)
 target_include_directories(errors PUBLIC include)
-target_link_libraries(errors PUBLIC fmt)
-target_compile_features(errors PRIVATE cxx_std_20)
 
 # Check if this project is the main project
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
@@ -37,14 +34,11 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     # Append the main library properties instead of linking the library.
     get_target_property(errors_SOURCES errors SOURCES)
     get_target_property(errors_INCLUDES errors INCLUDE_DIRECTORIES)
-    get_target_property(errors_LIBRARIES errors LINK_LIBRARIES)
-    get_target_property(errors_FEATURES errors COMPILE_FEATURES)
 
     # Build tests for the main library
     add_executable(errors_test test/error_test.cpp ${errors_SOURCES})
     target_include_directories(errors_test PRIVATE ${errors_INCLUDES})
-    target_link_libraries(errors_test PRIVATE Catch2::Catch2WithMain ${errors_LIBRARIES})
-    target_compile_features(errors_test PRIVATE ${errors_FEATURES})
+    target_link_libraries(errors_test PRIVATE Catch2::Catch2WithMain)
 
     # Enable support to check for test coverage
     if(NOT MSVC)
@@ -61,3 +55,5 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     add_xml_docs(docs include/errors/error.hpp)
   endif()
 endif()
+
+add_subdirectory(components)
