@@ -1,7 +1,5 @@
 #pragma once
 
-#include <fmt/core.h>
-
 #include <memory>
 #include <ostream>
 #include <string>
@@ -33,9 +31,6 @@ class Error {
 
   friend Error make(const std::string& msg);
 
-  template <typename... T>
-  friend Error format(fmt::format_string<T...> fmt, T&&... args);
-
   /**
    * @brief Writes the string representation of an error object to the given
    * output stream.
@@ -64,23 +59,4 @@ class Error {
  */
 Error make(const std::string& msg);
 
-/**
- * @brief Creates a new error object with a formatted message.
- * @tparam T Variadic template parameter pack for format arguments.
- * @param fmt A format string for the message.
- * @param args Format arguments.
- * @return A new error object.
- */
-template <typename... T>
-Error format(fmt::format_string<T...> fmt, T&&... args) {
-  return errors::make(fmt::format(fmt, std::forward<T>(args)...));
-}
-
 }  // namespace error
-
-template <>
-struct fmt::formatter<errors::Error> {
-  format_parse_context::iterator parse(format_parse_context& ctx) const;
-  format_context::iterator format(const errors::Error& err,
-                                  format_context& ctx) const;
-};
