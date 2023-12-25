@@ -3,6 +3,7 @@
 #include <memory>
 #include <ostream>
 #include <string>
+#include <string_view>
 #include <utility>
 
 namespace errors {
@@ -27,7 +28,7 @@ class Error {
    * std::cout << err << std::endl;
    * @endcode
    */
-  std::string message() const;
+  std::string_view message() const;
 
   friend Error make(const std::string& msg);
 
