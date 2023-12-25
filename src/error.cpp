@@ -9,6 +9,10 @@ std::string_view Error::message() const {
   return *message_ptr;
 }
 
+Error::operator bool() const {
+  return (bool)message_ptr;
+}
+
 std::ostream& operator<<(std::ostream& os, const errors::Error& err) {
   return os << "error: " << err.message();
 }
