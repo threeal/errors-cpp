@@ -45,7 +45,7 @@ class Error {
    * }
    * @endcode
    */
-  operator bool() const;
+  explicit operator bool() const;
 
   friend Error make(const std::string& msg);
 
