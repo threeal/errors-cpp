@@ -4,7 +4,7 @@ namespace errors {
 
 Error::Error(const std::shared_ptr<const std::string>& message_ptr) : message_ptr(message_ptr) {}
 
-std::string Error::message() const {
+std::string_view Error::message() const {
   if (!message_ptr) return "no error";
   return *message_ptr;
 }
