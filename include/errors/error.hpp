@@ -18,12 +18,6 @@ class Error {
   Error(const std::shared_ptr<const std::string>& message_ptr);
 
  public:
-
-  /**
-   * @brief Constructs an empty error object.
-   */
-  Error();
-
   /**
    * @brief Returns the error message.
    *
