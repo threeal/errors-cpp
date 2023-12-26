@@ -20,6 +20,15 @@ if(NOT_SUBPROJECT)
     if(NOT MSVC)
       target_compile_options(errors_format_test PRIVATE --coverage -O0 -fno-exceptions)
       target_link_options(errors_format_test PRIVATE --coverage)
+
+      get_target_property(errors_format_test_SOURCES errors_format_test SOURCES)
+      foreach(SOURCE ${errors_format_test_SOURCES})
+        set(GCDA ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/errors_format_test.dir/${SOURCE}.gcda)
+        add_custom_command(
+          TARGET errors_format_test PRE_LINK
+          COMMAND ${CMAKE_COMMAND} -E rm -f ${GCDA}
+        )
+      endforeach()
     endif()
 
     catch_discover_tests(errors_format_test)
