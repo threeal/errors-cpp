@@ -23,4 +23,9 @@ Error make(const std::string& msg) {
   return Error(std::make_shared<const std::string>(msg));
 }
 
+const Error& nil() {
+  static const Error err(nullptr);
+  return err;
+}
+
 }  // namespace error

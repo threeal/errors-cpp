@@ -54,6 +54,7 @@ class Error {
   explicit operator bool() const;
 
   friend Error make(const std::string& msg);
+  friend const Error& nil();
 
   /**
    * @brief Writes the string representation of an error object to the given
@@ -82,5 +83,12 @@ class Error {
  * @return A new error object.
  */
 Error make(const std::string& msg);
+
+
+/**
+ * @brief Gets a constant reference of an empty error.
+ * @return A constant reference of an empty error.
+ */
+const Error& nil();
 
 }  // namespace error
