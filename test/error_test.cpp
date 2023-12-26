@@ -3,13 +3,9 @@
 #include <sstream>
 
 TEST_CASE("Error Construction") {
-  const errors::Error err = errors::make("unknown error");
-  REQUIRE(err.message() == "unknown error");
-}
-
-TEST_CASE("Error Checking") {
   const auto err = errors::make("unknown error");
   REQUIRE(err);
+  REQUIRE(err.message() == "unknown error");
 }
 
 TEST_CASE("Error Printing Using OStream") {
