@@ -30,6 +30,23 @@ class Error {
    */
   std::string_view message() const;
 
+  /**
+   * @brief Checks whether the object contains an error.
+   * @return `true` if it contains an error, otherwise `false`.
+   *
+   * @code{.cpp}
+   * const auto err = errors::make("unknown error");
+   *
+   * // Print "contains error".
+   * if (err) {
+   *   std::cout << "contains error" << std::endl;
+   * } else {
+   *   std::cout << "no error" << std::endl;
+   * }
+   * @endcode
+   */
+  explicit operator bool() const;
+
   friend Error make(const std::string& msg);
 
   /**
