@@ -8,6 +8,12 @@ TEST_CASE("Error Construction") {
   REQUIRE(err.message() == "unknown error");
 }
 
+TEST_CASE("Empty Error Construction") {
+  const errors::Error err;
+  REQUIRE_FALSE(err);
+  REQUIRE(err.message() == "no error");
+}
+
 TEST_CASE("Error Printing Using OStream") {
   const auto err = errors::make("unknown error");
   const auto ss = std::stringstream() << err;
