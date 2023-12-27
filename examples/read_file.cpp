@@ -5,7 +5,7 @@
 errors::Error read_file(const char* filepath) {
   std::ifstream file(filepath);
   if (!file.is_open()) {
-    return errors::format("failed to open `{}` ({})", filepath, file.rdstate());
+    return errors::format("failed to open `{}` ({})", filepath, static_cast<int>(file.rdstate()));
   }
 
   std::string line;
