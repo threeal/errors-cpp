@@ -23,18 +23,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - name: Install Dependencies
-        run: |
-          sudo apt-get install -y doxygen
-          pip3 install -r docs/requirements.txt
+      - name: Install Doxygen
+        run: sudo apt-get install -y doxygen
+
+      - name: Configure Project
+        uses: threeal/cmake-action@v1.3.0
+        with:
+          options: BUILD_DOCS=ON
 
       - name: Build Documentation
-        run: sphinx-build -b html docs docs/build -W --keep-going
+        run: cmake --build build --target docs
 
       - name: Upload Documentation
         uses: actions/upload-pages-artifact@v3.0.0
         with:
-          path: docs/build
+          path: build/docs/html
 
       - name: Deploy Pages
         id: deploy-pages
