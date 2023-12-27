@@ -47,7 +47,7 @@ class Error {
    */
   explicit operator bool() const;
 
-  friend Error make(const std::string& msg);
+  friend Error make(const char* msg);
   friend const Error& nil();
 
   /**
@@ -76,7 +76,7 @@ class Error {
  * @param msg The error message.
  * @return A new error object.
  */
-Error make(const std::string& msg);
+Error make(const char* msg);
 
 
 /**

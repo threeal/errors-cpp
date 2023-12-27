@@ -17,7 +17,7 @@ std::ostream& operator<<(std::ostream& os, const errors::Error& err) {
   return os << "error: " << err.message();
 }
 
-Error make(const std::string& msg) {
+Error make(const char* msg) {
   return Error(std::make_shared<const std::string>(msg));
 }
 
