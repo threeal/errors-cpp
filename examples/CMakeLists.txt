@@ -1,0 +1,2 @@
+add_executable(errors_example_read_file read_file.cpp)
+target_link_libraries(errors_example_read_file PRIVATE errors)

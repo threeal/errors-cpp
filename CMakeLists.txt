@@ -73,8 +73,7 @@ if(NOT_SUBPROJECT)
   endif()
 
   if(BUILD_EXAMPLES)
-    add_executable(errors_example_read_file examples/read_file.cpp)
-    target_link_libraries(errors_example_read_file PRIVATE errors)
+    add_subdirectory(examples)
   endif()
 endif()
 
