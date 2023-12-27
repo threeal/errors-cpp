@@ -14,7 +14,12 @@ include(cmake/CPM.cmake)
 
 # Build the main library
 add_library(errors src/error.cpp)
-target_include_directories(errors PUBLIC include)
+target_sources(
+  errors PUBLIC
+  FILE_SET HEADERS
+  BASE_DIRS include
+  FILES include/errors/error.hpp
+)
 
 # Check if this project is the main project
 if(NOT_SUBPROJECT)
@@ -41,11 +46,11 @@ if(NOT_SUBPROJECT)
 
     # Append the main library properties instead of linking the library.
     get_target_property(errors_SOURCES errors SOURCES)
-    get_target_property(errors_INCLUDES errors INCLUDE_DIRECTORIES)
+    get_target_property(errors_HEADER_DIRS errors HEADER_DIRS)
 
     # Build tests for the main library
     add_executable(errors_test test/error_test.cpp ${errors_SOURCES})
-    target_include_directories(errors_test PRIVATE ${errors_INCLUDES})
+    target_include_directories(errors_test PRIVATE ${errors_HEADER_DIRS})
     target_link_libraries(errors_test PRIVATE Catch2::Catch2WithMain)
 
     # Enable support to check for test coverage
