@@ -1,4 +1,4 @@
-#include <cstring>
+#include <algorithm>
 #include <errors/error.hpp>
 
 namespace errors {
@@ -18,10 +18,11 @@ std::ostream& operator<<(std::ostream& os, const errors::Error& err) {
   return os << "error: " << err.message();
 }
 
-Error make(const char* msg) {
-  auto msg_copy = new char[std::strlen(msg)];
-  std::strcpy(msg_copy, msg);
-  return Error(std::shared_ptr<const char[]>(msg_copy));
+Error make(std::string_view msg) {
+  auto c_msg = new char[msg.size() + 1];
+  msg.copy(c_msg, msg.size());
+  c_msg[msg.size()] = 0;
+  return Error(std::shared_ptr<const char[]>(c_msg));
 }
 
 const Error& nil() {
