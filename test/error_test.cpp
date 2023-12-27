@@ -9,7 +9,7 @@ TEST_CASE("Error Construction") {
 }
 
 TEST_CASE("Empty Error Construction") {
-  const errors::Error err;
+  const auto err = errors::nil();
   REQUIRE_FALSE(err);
   REQUIRE(err.message() == "no error");
 }
