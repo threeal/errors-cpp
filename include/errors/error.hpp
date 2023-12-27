@@ -11,7 +11,7 @@ namespace errors {
 /**
  * @brief Represents error information.
  */
-class Error {
+class [[nodiscard]] Error {
  private:
   const std::shared_ptr<const std::string> message_ptr;
 
