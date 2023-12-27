@@ -71,10 +71,9 @@ if(NOT_SUBPROJECT)
     catch_discover_tests(errors_test)
   endif()
 
-  # Build XML documentation
   if(BUILD_DOCS)
-    include(cmake/add_xml_docs.cmake)
-    add_xml_docs(errors_docs include/errors/error.hpp)
+    include(cmake/GenerateDocs.cmake)
+    target_generate_xml_docs(errors)
   endif()
 
   if(BUILD_EXAMPLES)

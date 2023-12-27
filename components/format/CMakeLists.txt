@@ -39,8 +39,7 @@ if(NOT_SUBPROJECT)
     catch_discover_tests(errors_format_test)
   endif()
 
-  # Build XML documentation
   if(BUILD_DOCS)
-    add_xml_docs(errors_format_docs include/errors/format.hpp)
+    target_generate_xml_docs(errors_format)
   endif()
 endif()
