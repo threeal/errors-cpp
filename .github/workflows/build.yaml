@@ -39,7 +39,7 @@ jobs:
           options: BUILD_EXAMPLES=ON
 
       - name: Build Examples
-        run: cmake --build build
+        run: cmake --build build --target errors_examples
 
   build-docs:
     name: Build Documentation
