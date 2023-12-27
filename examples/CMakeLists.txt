@@ -1,5 +1,5 @@
-add_custom_target(errors_examples)
+add_custom_target(examples)
 
-add_executable(errors_example_read_file read_file.cpp)
-target_link_libraries(errors_example_read_file PRIVATE errors)
-add_dependencies(errors_examples errors_example_read_file)
+add_executable(example_read_file read_file.cpp)
+target_link_libraries(example_read_file PRIVATE errors)
+add_dependencies(examples example_read_file)
