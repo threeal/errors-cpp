@@ -13,9 +13,9 @@ namespace errors {
  */
 class [[nodiscard]] Error {
  private:
-  const std::shared_ptr<const std::string> message_ptr;
+  const std::shared_ptr<const char[]> msg_ptr;
 
-  Error(const std::shared_ptr<const std::string>& message_ptr);
+  Error(const std::shared_ptr<const char[]>& msg_ptr);
 
  public:
   /**
@@ -47,7 +47,7 @@ class [[nodiscard]] Error {
    */
   explicit operator bool() const;
 
-  friend Error make(const std::string& msg);
+  friend Error make(std::string_view msg);
   friend const Error& nil();
 
   /**
@@ -76,7 +76,7 @@ class [[nodiscard]] Error {
  * @param msg The error message.
  * @return A new error object.
  */
-Error make(const std::string& msg);
+Error make(std::string_view msg);
 
 
 /**
