@@ -22,6 +22,25 @@ jobs:
       - name: Build Project
         run: cmake --build build --config Release
 
+  build-examples:
+    name: Build Examples
+    runs-on: ${{ matrix.os }}-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu, windows]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: Configure Project
+        uses: threeal/cmake-action@v1.3.0
+        with:
+          options: BUILD_EXAMPLES=ON
+
+      - name: Build Examples
+        run: cmake --build build --target examples
+
   build-docs:
     name: Build Documentation
     runs-on: ubuntu-latest
