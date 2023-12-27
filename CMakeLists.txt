@@ -101,3 +101,8 @@ install(
   NAMESPACE errors::
   DESTINATION lib/cmake/Errors
 )
+
+install(
+  FILES cmake/ErrorsConfig.cmake
+  DESTINATION lib/cmake/Errors
+)
