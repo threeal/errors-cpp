@@ -1,12 +1,13 @@
+#include <cstring>
 #include <errors/error.hpp>
 
 namespace errors {
 
-Error::Error(const std::shared_ptr<const std::string>& message_ptr) : message_ptr(message_ptr) {}
+Error::Error(const std::shared_ptr<const char[]>& message_ptr) : message_ptr(message_ptr) {}
 
 std::string_view Error::message() const {
   if (!message_ptr) return "no error";
-  return *message_ptr;
+  return message_ptr.get();
 }
 
 Error::operator bool() const {
@@ -18,7 +19,9 @@ std::ostream& operator<<(std::ostream& os, const errors::Error& err) {
 }
 
 Error make(const char* msg) {
-  return Error(std::make_shared<const std::string>(msg));
+  auto msg_copy = new char[std::strlen(msg)];
+  std::strcpy(msg_copy, msg);
+  return Error(std::shared_ptr<const char[]>(msg_copy));
 }
 
 const Error& nil() {

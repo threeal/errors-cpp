@@ -13,9 +13,9 @@ namespace errors {
  */
 class Error {
  private:
-  const std::shared_ptr<const std::string> message_ptr;
+  const std::shared_ptr<const char[]> message_ptr;
 
-  Error(const std::shared_ptr<const std::string>& message_ptr);
+  Error(const std::shared_ptr<const char[]>& message_ptr);
 
  public:
   /**
