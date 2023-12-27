@@ -82,3 +82,7 @@ if(NOT_SUBPROJECT)
 endif()
 
 add_subdirectory(components)
+
+if(NOT_SUBPROJECT AND BUILD_DOCS)
+  add_subdirectory(docs)
+endif()
