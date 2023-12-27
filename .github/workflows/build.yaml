@@ -22,6 +22,15 @@ jobs:
       - name: Build Project
         run: cmake --build build --config Release
 
+      - name: Install Project
+        run: cmake --install build --prefix install
+
+      - name: Upload Project
+        uses: actions/upload-artifact@v4.0.0
+        with:
+          name: package-${{ matrix.os }}
+          path: install
+
   build-examples:
     name: Build Examples
     runs-on: ${{ matrix.os }}-latest
