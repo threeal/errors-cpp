@@ -3,15 +3,15 @@
 
 namespace errors {
 
-Error::Error(const std::shared_ptr<const char[]>& message_ptr) : message_ptr(message_ptr) {}
+Error::Error(const std::shared_ptr<const char[]>& msg_ptr) : msg_ptr(msg_ptr) {}
 
 std::string_view Error::message() const {
-  if (!message_ptr) return "no error";
-  return message_ptr.get();
+  if (!msg_ptr) return "no error";
+  return msg_ptr.get();
 }
 
 Error::operator bool() const {
-  return (bool)message_ptr;
+  return (bool)msg_ptr;
 }
 
 std::ostream& operator<<(std::ostream& os, const errors::Error& err) {
