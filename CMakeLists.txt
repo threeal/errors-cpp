@@ -19,6 +19,7 @@ target_include_directories(errors PUBLIC include)
 # Check if this project is the main project
 if(NOT_SUBPROJECT)
   option(BUILD_DOCS "Enable documentations build" OFF)
+  option(BUILD_EXAMPLES "Enable examples build" OFF)
 
   # Statically analyze code by checking for warnings
   cpmaddpackage(gh:threeal/CheckWarning.cmake@2.0.1)
@@ -69,6 +70,11 @@ if(NOT_SUBPROJECT)
   if(BUILD_DOCS)
     include(cmake/add_xml_docs.cmake)
     add_xml_docs(errors_docs include/errors/error.hpp)
+  endif()
+
+  if(BUILD_EXAMPLES)
+    add_executable(errors_example_read_file examples/read_file.cpp)
+    target_link_libraries(errors_example_read_file PRIVATE errors)
   endif()
 endif()
 
