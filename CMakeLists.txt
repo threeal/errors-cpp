@@ -110,7 +110,15 @@ install(
   DESTINATION lib/cmake/Errors
 )
 
+include(CMakePackageConfigHelpers)
+write_basic_package_version_file(
+  ErrorsConfigVersion.cmake
+  COMPATIBILITY SameMajorVersion
+)
+
 install(
-  FILES cmake/ErrorsConfig.cmake
+  FILES
+    cmake/ErrorsConfig.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/ErrorsConfigVersion.cmake
   DESTINATION lib/cmake/Errors
 )
