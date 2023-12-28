@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 3.23)
 
-project(errors)
+project(
+  Errors
+  VERSION 1.0.0
+  DESCRIPTION "A C++ package that provides utilities for error handling ."
+  HOMEPAGE_URL https://github.com/threeal/errors-cpp
+  LANGUAGES CXX
+)
 
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   set(NOT_SUBPROJECT TRUE)
