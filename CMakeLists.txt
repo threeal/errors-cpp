@@ -9,8 +9,10 @@ endif()
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
 # Initialize CPM.cmake
-include(cmake/CPM.cmake)
+include(CPM)
 
 # Build the main library
 add_library(errors src/error.cpp)
@@ -42,7 +44,7 @@ if(NOT_SUBPROJECT)
 
     # Import Catch2 as the main testing framework
     cpmaddpackage("gh:catchorg/Catch2@3.5.0")
-    include("${Catch2_SOURCE_DIR}/extras/Catch.cmake")
+    include(${Catch2_SOURCE_DIR}/extras/Catch.cmake)
 
     # Append the main library properties instead of linking the library.
     get_target_property(errors_SOURCES errors SOURCES)
@@ -72,7 +74,7 @@ if(NOT_SUBPROJECT)
   endif()
 
   if(BUILD_DOCS)
-    include(cmake/GenerateDocs.cmake)
+    include(GenerateDocs)
     target_generate_xml_docs(errors)
   endif()
 
