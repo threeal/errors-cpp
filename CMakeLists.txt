@@ -88,3 +88,23 @@ add_subdirectory(components)
 if(NOT_SUBPROJECT AND BUILD_DOCS)
   add_subdirectory(docs)
 endif()
+
+install(
+  TARGETS errors errors_format
+  EXPORT errors_targets
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
+  FILE_SET HEADERS
+)
+
+install(
+  EXPORT errors_targets
+  FILE ErrorsTargets.cmake
+  NAMESPACE errors::
+  DESTINATION lib/cmake/Errors
+)
+
+install(
+  FILES cmake/ErrorsConfig.cmake
+  DESTINATION lib/cmake/Errors
+)
