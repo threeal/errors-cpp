@@ -11,6 +11,17 @@ It facilitates error handling by returning values, following the style of `Go's 
 .. _try-catch exceptions: https://en.cppreference.com/w/cpp/language/try_catch
 .. _Go's error handling: https://go.dev/blog/error-handling-and-go
 
+Key Features
+------------
+
+This package provides the following key features:
+
+- Error handling in the style of Go  by returning an `errors::Error`.
+- Support for creating errors in the style of `fmtlib`_ using `errors::format`.
+- Direct printing of `errors::Error` using C++ streams and fmtlib.
+
+.. _fmtlib: https://github.com/fmtlib/fmt
+
 API Docs
 --------
 

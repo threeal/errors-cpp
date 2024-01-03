@@ -10,6 +10,14 @@ This package mainly consists of the `errors::Error` class, representing an objec
 This package serves as an alternative to error handling using [try-catch exceptions](https://en.cppreference.com/w/cpp/language/try_catch), commonly found in C++ code.
 It facilitates error handling by returning values, following the style of [Go's error handling](https://go.dev/blog/error-handling-and-go).
 
+## Key Features
+
+This package provides the following key features:
+
+- Error handling in the style of Go  by returning an `errors::Error`.
+- Support for creating errors in the style of [fmtlib](https://github.com/fmtlib/fmt) using `errors::format`.
+- Direct printing of `errors::Error` using C++ streams and fmtlib.
+
 ## License
 
 This project is licensed under the terms of the [MIT License](./LICENSE).
