@@ -18,6 +18,34 @@ This package provides the following key features:
 - Support for creating errors in the style of [fmtlib](https://github.com/fmtlib/fmt) using `errors::format`.
 - Direct printing of `errors::Error` using C++ streams and fmtlib.
 
+## Integration
+
+To integrate this package into your C++ project, you can build and install it locally using [CMake](https://cmake.org/):
+
+```sh
+cmake -B build .
+cmake --build build --config Release
+cmake --install build
+```
+
+Once installed, you can use it in your CMake project as the `Errors` package:
+
+```cmake
+find_package(Errors 1.0.0 REQUIRED CONFIG)
+
+add_executable(foo foo.cpp)
+target_link_libraries(foo PRIVATE errors::errors)
+```
+
+Alternatively, you can also integrate this package using [CPM.cmake](https://github.com/cpm-cmake/CPM.cmake):
+
+```cmake
+cpmaddpackage(gh:threeal/errors-cpp@1.0.0)
+
+add_executable(foo foo.cpp)
+target_link_libraries(foo PRIVATE errors::errors)
+```
+
 ## License
 
 This project is licensed under the terms of the [MIT License](./LICENSE).

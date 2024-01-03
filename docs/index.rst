@@ -22,6 +22,38 @@ This package provides the following key features:
 
 .. _fmtlib: https://github.com/fmtlib/fmt
 
+Integration
+-----------
+
+To integrate this package into your C++ project, you can build and install it locally using `CMake`_:
+
+.. code-block:: sh
+
+   cmake -B build .
+   cmake --build build --config Release
+   cmake --install build
+
+Once installed, you can use it in your CMake project as the `Errors` package:
+
+.. code-block:: cmake
+
+   find_package(Errors 1.0.0 REQUIRED CONFIG)
+
+   add_executable(foo foo.cpp)
+   target_link_libraries(foo PRIVATE errors::errors)
+
+Alternatively, you can also integrate this package using `CPM.cmake`_:
+
+.. code-block:: cmake
+
+   cpmaddpackage(gh:threeal/errors-cpp@1.0.0)
+
+   add_executable(foo foo.cpp)
+   target_link_libraries(foo PRIVATE errors::errors)
+
+.. _CMake: https://cmake.org/
+.. _CPM.cmake: https://github.com/cpm-cmake/CPM.cmake
+
 API Docs
 --------
 
