@@ -1,9 +1,15 @@
 Errors C++
 =============
 
-A `C++`_ package that provides utilities for error handling.
+Error C++ is a `C++`_ package that provides utilities for error handling.
+This package mainly consists of the `errors::Error` class, representing an object that may contain an error.
+
+This package serves as an alternative to error handling using `try-catch exceptions`_, commonly found in C++ code.
+It facilitates error handling by returning values, following the style of `Go's error handling`_.
 
 .. _C++: https://isocpp.org
+.. _try-catch exceptions: https://en.cppreference.com/w/cpp/language/try_catch
+.. _Go's error handling: https://go.dev/blog/error-handling-and-go
 
 API Docs
 --------
