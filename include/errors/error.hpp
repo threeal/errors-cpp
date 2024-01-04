@@ -66,18 +66,15 @@ class [[nodiscard]] Error {
   std::string_view message() const;
 
   /**
-   * @brief Checks whether the object contains an error.
+   * @brief Checks whether it contains an error or not.
    * @return `true` if it contains an error, otherwise `false`.
    *
    * @code{.cpp}
    * const auto err = errors::make("unknown error");
+   * assert(err);
    *
-   * // Print "contains error".
-   * if (err) {
-   *   std::cout << "contains error" << std::endl;
-   * } else {
-   *   std::cout << "no error" << std::endl;
-   * }
+   * const auto no_err = errors::nil();
+   * assert(!no_err);
    * @endcode
    */
   explicit operator bool() const;
