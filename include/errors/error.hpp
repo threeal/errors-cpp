@@ -17,7 +17,7 @@ namespace errors {
  */
 class [[nodiscard]] Error {
  private:
-  const std::shared_ptr<const char[]> msg_ptr;
+  std::shared_ptr<const char[]> msg_ptr;
 
   Error(const std::shared_ptr<const char[]>& msg_ptr);
 
