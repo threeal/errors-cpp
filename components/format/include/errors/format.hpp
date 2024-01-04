@@ -2,6 +2,7 @@
 
 #include <errors/error.hpp>
 #include <fmt/core.h>
+#include <fmt/ostream.h>
 
 namespace errors {
 
@@ -17,15 +18,6 @@ Error format(fmt::format_string<T...> fmt, T&&... args);
 
 }  // namespace errors
 
-namespace fmt {
-
-template <>
-struct formatter<errors::Error> {
-  format_parse_context::iterator parse(format_parse_context& ctx) const;
-  format_context::iterator format(const errors::Error& err,
-                                  format_context& ctx) const;
-};
-
-}  // namespace fmt
+template <> struct fmt::formatter<errors::Error> : ostream_formatter {};
 
 #include "format.ipp"
