@@ -106,6 +106,18 @@ class [[nodiscard]] Error {
  * @brief Creates a new error object with the given message.
  * @param msg The error message.
  * @return A new error object.
+ *
+ * Use this function to create a new error object with the given message.
+ * Be aware that creating a new error object with an empty message will treat the object as containing an error.
+ * Use `errors::nil` instead if you want to create an empty error object.
+ *
+ * @code{.cpp}
+ * auto err = errors::make("unknown error");
+ * assert(err);
+ *
+ * err = errors::make("");
+ * assert(err);
+ * @endcode
  */
 Error make(std::string_view msg);
 
