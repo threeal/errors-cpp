@@ -6,6 +6,10 @@
 #include <string_view>
 #include <utility>
 
+// Prevent conflicting name with the nil macro in Objective-C.
+// See: https://github.com/threeal/errors-cpp/issues/128
+#undef nil
+
 namespace errors {
 
 /**
@@ -77,7 +81,6 @@ class [[nodiscard]] Error {
  * @return A new error object.
  */
 Error make(std::string_view msg);
-
 
 /**
  * @brief Gets a constant reference of an empty error.
