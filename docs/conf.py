@@ -1,8 +1,8 @@
 import os, subprocess
 
 project = 'Errors C++'
-copyright = '2023-2024, Alfi Maulana'
 author = 'Alfi Maulana'
+copyright = '2023-2024, Alfi Maulana'
 
 extensions = ['breathe']
 
