@@ -106,7 +106,13 @@ API Docs
 
 .. doxygenclass:: errors::Error
    :project: errors
-   :members:
+   :members: message, operator bool, operator<<
+
+.. doxygenfunction:: errors::make
+   :project: errors
+
+.. doxygenfunction:: errors::nil
+   :project: errors
 
 Format Component
 ^^^^^^^^^^^^^^^^
