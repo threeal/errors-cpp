@@ -124,6 +124,18 @@ Error make(std::string_view msg);
 /**
  * @brief Gets a constant reference of an empty error.
  * @return A constant reference of an empty error.
+ *
+ * Use this function to initialize a new empty error object.
+ * If copied onto another error object, it will set that object to be treated as not containing an error.
+ *
+ * @code{.cpp}
+ * const auto no_err = errors::nil();
+ * assert(!no_err);
+ *
+ * auto err = errors::make("unknown error");
+ * err = errors::nil();
+ * assert(!err);
+ * @endcode
  */
 const Error& nil();
 
