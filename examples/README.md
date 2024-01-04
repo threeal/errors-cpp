@@ -9,5 +9,5 @@ This project includes the following two examples:
 
 - [`read_file.cpp`](./read_file.cpp):
   Reads a file from the given path and prints its content.
-  This code returns an error if it fails to read the file.
+  This code returns an error if it fails to open the file.
   This example illustrates the same error handling flow but with examples of how to create an error object with a formatted message.
