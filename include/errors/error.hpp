@@ -14,6 +14,32 @@ namespace errors {
 
 /**
  * @brief Represents error information.
+ *
+ * Use this class as the return type for functions that may produce errors.
+ * This class has two state: either it contains an error or not.
+ * Use boolean operations to check whether an object contains an error or not.
+ *
+ * @code{.cpp}
+ * errors::Error print_hex(const char* number_str) {
+ *   int number = std::atoi(number_str);
+ *   if (number_str[0] != '0' && number == 0) {
+ *     return errors::make("is not a number");
+ *   }
+ *
+ *   std::cout << std::hex << number << std::endl;
+ *   return errors::nil();
+ * }
+ *
+ * int main() {
+ *   // Print "7b".
+ *   auto err = print_hex("123");
+ *   assert(!err);
+ *
+ *   // Error.
+ *   err = print_hex("not a number");
+ *   assert(err);
+ * }
+ * @endcode
  */
 class [[nodiscard]] Error {
  private:
