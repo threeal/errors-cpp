@@ -1,7 +1,7 @@
 Errors C++
 =============
 
-Error C++ is a `C++`_ package that provides utilities for error handling.
+Errors C++ is a `C++`_ package that provides utilities for error handling.
 This package mainly consists of the `errors::Error` class, representing an object that may contain an error.
 
 This package serves as an alternative to error handling using `try-catch exceptions`_, commonly found in C++ code.

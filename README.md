@@ -1,4 +1,4 @@
-# Error C++
+# Errors C++
 
 [![version](https://img.shields.io/github/v/release/threeal/errors-cpp?style=flat-square)](https://github.com/threeal/errors-cpp/releases)
 [![license](https://img.shields.io/github/license/threeal/errors-cpp?style=flat-square)](./LICENSE)
@@ -6,7 +6,7 @@
 [![test status](https://img.shields.io/github/actions/workflow/status/threeal/errors-cpp/test.yaml?branch=main&&label=test&style=flat-square)](https://github.com/threeal/errors-cpp/actions/workflows/test.yaml)
 [![deploy status](https://img.shields.io/github/actions/workflow/status/threeal/errors-cpp/deploy.yaml?branch=main&label=deploy&style=flat-square)](https://github.com/threeal/errors-cpp/actions/workflows/deploy.yaml)
 
-Error C++ is a [C++](https://isocpp.org/) package that provides utilities for error handling.
+Errors C++ is a [C++](https://isocpp.org/) package that provides utilities for error handling.
 This package mainly consists of the `errors::Error` class, representing an object that may contain an error.
 
 This package serves as an alternative to error handling using [try-catch exceptions](https://en.cppreference.com/w/cpp/language/try_catch), commonly found in C++ code.
