@@ -2,7 +2,7 @@ Errors C++
 =============
 
 Errors C++ is a `C++`_ package that provides utilities for error handling.
-This package mainly consists of the `errors::Error` class, representing an object that may contain an error.
+This package mainly consists of the :cpp:class:`errors::Error` class, representing an object that may contain an error.
 
 This package serves as an alternative to error handling using `try-catch exceptions`_, commonly found in C++ code.
 It facilitates error handling by returning values, following the style of `Go's error handling`_.
@@ -16,9 +16,9 @@ Key Features
 
 This package provides the following key features:
 
-- Error handling in the style of Go  by returning an `errors::Error`.
-- Support for creating errors in the style of `fmtlib`_ using `errors::format`.
-- Direct printing of `errors::Error` using C++ streams and fmtlib.
+- Error handling in the style of Go  by returning an :cpp:class:`errors::Error`.
+- Support for creating errors in the style of `fmtlib`_ using :cpp:func:`errors::format`.
+- Direct printing of :cpp:class:`errors::Error` using C++ streams and fmtlib.
 
 .. _fmtlib: https://github.com/fmtlib/fmt
 
@@ -58,7 +58,7 @@ Alternatively, you can also integrate this package using `CPM.cmake`_:
 Usage
 -----
 
-This package contains an `errors::Error` class, which represents an error object.
+This package contains an :cpp:class:`errors::Error` class, which represents an error object.
 Functions that may produce errors should return this object so that the error can be handled properly.
 
 .. code-block:: cpp
@@ -74,7 +74,7 @@ Functions that may produce errors should return this object so that the error ca
      // Continue processing if no error.
    }
 
-For functions returning `errors::Error`, use `errors::nil` function to signify no error or return an error object created from the `errors::make` function.
+For functions returning :cpp:class:`errors::Error`, use :cpp:func:`errors::nil` function to signify no error or return an error object created from the :cpp:func:`errors::make` function.
 
 .. code-block:: cpp
 
@@ -89,7 +89,7 @@ For functions returning `errors::Error`, use `errors::nil` function to signify n
      return errors::nil();
    }
 
-Alternatively, an error object can also be created with a formatted message in the style of fmtlib using `errors::format` function.
+Alternatively, an error object can also be created with a formatted message in the style of fmtlib using :cpp:func:`errors::format` function.
 
 .. code-block:: cpp
 
@@ -106,7 +106,13 @@ API Docs
 
 .. doxygenclass:: errors::Error
    :project: errors
-   :members:
+   :members: message, operator bool, operator<<
+
+.. doxygenfunction:: errors::make
+   :project: errors
+
+.. doxygenfunction:: errors::nil
+   :project: errors
 
 Format Component
 ^^^^^^^^^^^^^^^^
