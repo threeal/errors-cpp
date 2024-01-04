@@ -50,12 +50,17 @@ class [[nodiscard]] Error {
  public:
   /**
    * @brief Returns the error message.
+   * @returns The error message.
+   *
+   * Returns the error message as a string view.
+   * If the object does not contain an error, it will return the string "no error" instead.
    *
    * @code{.cpp}
    * const auto err = errors::make("unknown error");
+   * const auto no_err = errors::nil();
    *
-   * // Print "unknown error"
-   * std::cout << err << std::endl;
+   * // Print "unknown error, no error".
+   * std::cout << err.message() << ", " << no_err.message() << std::endl;
    * @endcode
    */
   std::string_view message() const;
