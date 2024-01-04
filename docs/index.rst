@@ -49,7 +49,7 @@ Alternatively, you can also integrate this package using `CPM.cmake`_:
    cpmaddpackage(gh:threeal/errors-cpp@1.0.0)
 
    add_executable(foo foo.cpp)
-   target_link_libraries(foo PRIVATE errors::errors)
+   target_link_libraries(foo PRIVATE errors)
 
 .. _CMake: https://cmake.org/
 .. _CPM.cmake: https://github.com/cpm-cmake/CPM.cmake
