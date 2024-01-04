@@ -89,14 +89,13 @@ class [[nodiscard]] Error {
    * @param err The error object.
    * @return The output stream.
    *
-   * This operator allows an error object to be printed to the output stream
-   * using the << operator. The error message will be written to the output
-   * stream.
+   * This operator allows an error object to be printed to the output stream using the << operator.
+   * The error message will be written to the output stream.
    *
    * @code{.cpp}
    * const auto err = errors::make("unknown error");
    *
-   * // Print "error: unknown error"
+   * // Print "error: unknown error".
    * std::cout << err << std::endl;
    * @endcode
    */
