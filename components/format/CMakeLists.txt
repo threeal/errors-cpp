@@ -1,4 +1,4 @@
-cpmaddpackage("gh:fmtlib/fmt#10.2.0")
+cpmaddpackage("gh:fmtlib/fmt#10.2.1")
 
 add_library(errors_format INTERFACE)
 target_sources(
