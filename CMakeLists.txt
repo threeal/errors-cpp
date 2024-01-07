@@ -14,7 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
-  set(NOT_SUBPROJECT TRUE)
+  set(SUBPROJECT OFF)
 
   option(BUILD_DOCS "Enable documentations build" OFF)
   option(BUILD_EXAMPLES "Enable examples build" OFF)
@@ -27,7 +27,7 @@ endif()
 # Initialize CPM.cmake
 include(CPM)
 
-if(NOT_SUBPROJECT)
+if(NOT SUBPROJECT)
   # Statically analyze code by checking for warnings
   cpmaddpackage(gh:threeal/CheckWarning.cmake@2.0.1)
   add_check_warning()
@@ -49,7 +49,7 @@ target_sources(
   FILES include/errors/error.hpp
 )
 
-if(NOT_SUBPROJECT AND BUILD_TESTING)
+if(NOT SUBPROJECT AND BUILD_TESTING)
   # Import Catch2 as the main testing framework
   cpmaddpackage(gh:catchorg/Catch2@3.5.1)
   include(${Catch2_SOURCE_DIR}/extras/Catch.cmake)
@@ -70,18 +70,18 @@ if(NOT_SUBPROJECT AND BUILD_TESTING)
   catch_discover_tests(errors_test)
 endif()
 
-if(NOT_SUBPROJECT AND BUILD_DOCS)
+if(NOT SUBPROJECT AND BUILD_DOCS)
   include(GenerateDocs)
   target_generate_xml_docs(errors)
 endif()
 
 add_subdirectory(components)
 
-if(NOT_SUBPROJECT AND BUILD_DOCS)
+if(NOT SUBPROJECT AND BUILD_DOCS)
   add_subdirectory(docs)
 endif()
 
-if(NOT_SUBPROJECT AND BUILD_EXAMPLES)
+if(NOT SUBPROJECT AND BUILD_EXAMPLES)
   add_subdirectory(examples)
 endif()
 

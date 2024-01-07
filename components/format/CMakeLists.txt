@@ -9,7 +9,7 @@ target_sources(
 )
 target_link_libraries(errors_format INTERFACE errors fmt)
 
-if(NOT_SUBPROJECT AND BUILD_TESTING)
+if(NOT SUBPROJECT AND BUILD_TESTING)
   # Append the main library properties instead of linking the library.
   get_target_property(errors_format_HEADER_DIRS errors_format HEADER_DIRS)
   get_target_property(errors_format_LIBRARIES errors_format INTERFACE_LINK_LIBRARIES)
@@ -26,6 +26,6 @@ if(NOT_SUBPROJECT AND BUILD_TESTING)
   catch_discover_tests(errors_format_test)
 endif()
 
-if(NOT_SUBPROJECT AND BUILD_DOCS)
+if(NOT SUBPROJECT AND BUILD_DOCS)
   target_generate_xml_docs(errors_format)
 endif()
