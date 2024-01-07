@@ -49,32 +49,30 @@ target_sources(
   FILES include/errors/error.hpp
 )
 
-if(NOT_SUBPROJECT)
-  if(BUILD_TESTING)
-    # Import Catch2 as the main testing framework
-    cpmaddpackage(gh:catchorg/Catch2@3.5.1)
-    include(${Catch2_SOURCE_DIR}/extras/Catch.cmake)
+if(NOT_SUBPROJECT AND BUILD_TESTING)
+  # Import Catch2 as the main testing framework
+  cpmaddpackage(gh:catchorg/Catch2@3.5.1)
+  include(${Catch2_SOURCE_DIR}/extras/Catch.cmake)
 
-    # Append the main library properties instead of linking the library.
-    get_target_property(errors_SOURCES errors SOURCES)
-    get_target_property(errors_HEADER_DIRS errors HEADER_DIRS)
+  # Append the main library properties instead of linking the library.
+  get_target_property(errors_SOURCES errors SOURCES)
+  get_target_property(errors_HEADER_DIRS errors HEADER_DIRS)
 
-    # Build tests for the main library
-    add_executable(errors_test test/error_test.cpp ${errors_SOURCES})
-    target_include_directories(errors_test PRIVATE ${errors_HEADER_DIRS})
-    target_link_libraries(errors_test PRIVATE Catch2::Catch2WithMain)
+  # Build tests for the main library
+  add_executable(errors_test test/error_test.cpp ${errors_SOURCES})
+  target_include_directories(errors_test PRIVATE ${errors_HEADER_DIRS})
+  target_link_libraries(errors_test PRIVATE Catch2::Catch2WithMain)
 
-    # Enable support to check for test coverage
-    include(CheckCoverage)
-    target_check_coverage(errors_test)
+  # Enable support to check for test coverage
+  include(CheckCoverage)
+  target_check_coverage(errors_test)
 
-    catch_discover_tests(errors_test)
-  endif()
+  catch_discover_tests(errors_test)
+endif()
 
-  if(BUILD_DOCS)
-    include(GenerateDocs)
-    target_generate_xml_docs(errors)
-  endif()
+if(NOT_SUBPROJECT AND BUILD_DOCS)
+  include(GenerateDocs)
+  target_generate_xml_docs(errors)
 endif()
 
 add_subdirectory(components)
