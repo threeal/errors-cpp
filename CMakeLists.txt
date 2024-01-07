@@ -72,16 +72,16 @@ if(NOT_SUBPROJECT)
     include(GenerateDocs)
     target_generate_xml_docs(errors)
   endif()
-
-  if(BUILD_EXAMPLES)
-    add_subdirectory(examples)
-  endif()
 endif()
 
 add_subdirectory(components)
 
 if(NOT_SUBPROJECT AND BUILD_DOCS)
   add_subdirectory(docs)
+endif()
+
+if(NOT_SUBPROJECT AND BUILD_EXAMPLES)
+  add_subdirectory(examples)
 endif()
 
 install(
