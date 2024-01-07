@@ -8,32 +8,26 @@ project(
   LANGUAGES CXX
 )
 
-if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
-  set(NOT_SUBPROJECT TRUE)
-endif()
-
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
-# Initialize CPM.cmake
-include(CPM)
+if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  set(NOT_SUBPROJECT TRUE)
 
-# Build the main library
-add_library(errors src/error.cpp)
-target_sources(
-  errors PUBLIC
-  FILE_SET HEADERS
-  BASE_DIRS include
-  FILES include/errors/error.hpp
-)
-
-# Check if this project is the main project
-if(NOT_SUBPROJECT)
   option(BUILD_DOCS "Enable documentations build" OFF)
   option(BUILD_EXAMPLES "Enable examples build" OFF)
 
+  if(BUILD_TESTING)
+    enable_testing()
+  endif()
+endif()
+
+# Initialize CPM.cmake
+include(CPM)
+
+if(NOT_SUBPROJECT)
   # Statically analyze code by checking for warnings
   cpmaddpackage(gh:threeal/CheckWarning.cmake@2.0.1)
   add_check_warning()
@@ -44,10 +38,19 @@ if(NOT_SUBPROJECT)
     VERSION 1.8.0
     OPTIONS "FORMAT_SKIP_CMAKE ON"
   )
+endif()
 
+# Build the main library
+add_library(errors src/error.cpp)
+target_sources(
+  errors PUBLIC
+  FILE_SET HEADERS
+  BASE_DIRS include
+  FILES include/errors/error.hpp
+)
+
+if(NOT_SUBPROJECT)
   if(BUILD_TESTING)
-    enable_testing()
-
     # Import Catch2 as the main testing framework
     cpmaddpackage(gh:catchorg/Catch2@3.5.1)
     include(${Catch2_SOURCE_DIR}/extras/Catch.cmake)
