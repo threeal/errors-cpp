@@ -14,14 +14,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
-  set(SUBPROJECT OFF)
-
   option(BUILD_DOCS "Enable documentations build" OFF)
   option(BUILD_EXAMPLES "Enable examples build" OFF)
 
   if(BUILD_TESTING)
     enable_testing()
   endif()
+else()
+  set(SUBPROJECT ON)
 endif()
 
 # Initialize CPM.cmake
