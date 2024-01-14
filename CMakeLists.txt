@@ -29,7 +29,8 @@ include(CPM)
 
 if(NOT SUBPROJECT)
   # Statically analyze code by checking for warnings
-  cpmaddpackage(gh:threeal/CheckWarning.cmake@2.0.1)
+  cpmaddpackage(gh:threeal/CheckWarning.cmake@2.1.0)
+  include(${CheckWarning_SOURCE_DIR}/cmake/CheckWarning.cmake)
   add_check_warning()
 
   # Import Format.cmake to format source code
