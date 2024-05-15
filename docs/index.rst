@@ -114,11 +114,8 @@ API Docs
 .. doxygenfunction:: errors::nil
    :project: errors
 
-Format Component
-^^^^^^^^^^^^^^^^
-
 .. doxygenfunction:: errors::format
-   :project: errors_format
+   :project: errors
 
 License
 -------
