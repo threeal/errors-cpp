@@ -32,13 +32,6 @@ if(NOT SUBPROJECT)
   cpmaddpackage(gh:threeal/CheckWarning.cmake@2.1.0)
   include(${CheckWarning_SOURCE_DIR}/cmake/CheckWarning.cmake)
   add_check_warning()
-
-  # Import Format.cmake to format source code
-  cpmaddpackage(
-    GITHUB_REPOSITORY TheLartians/Format.cmake
-    VERSION 1.8.0
-    OPTIONS "FORMAT_SKIP_CMAKE ON"
-  )
 endif()
 
 # Build the main library
@@ -84,6 +77,13 @@ endif()
 
 if(NOT SUBPROJECT AND BUILD_EXAMPLES)
   add_subdirectory(examples)
+endif()
+
+if(NOT SUBPROJECT AND BUILD_TESTING)
+  # Enable automatic target formatting.
+  cpmaddpackage(gh:threeal/FixFormat.cmake@1.1.1)
+  include(${FixFormat_SOURCE_DIR}/cmake/FixFormat.cmake)
+  add_fix_format()
 endif()
 
 install(
