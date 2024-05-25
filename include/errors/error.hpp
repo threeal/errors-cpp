@@ -137,4 +137,4 @@ Error make(std::string_view msg);
  */
 const Error& nil();
 
-}  // namespace error
+}  // namespace errors
