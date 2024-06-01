@@ -29,4 +29,4 @@ const Error& nil() {
   return err;
 }
 
-}  // namespace error
+}  // namespace errors
