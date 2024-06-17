@@ -40,7 +40,9 @@ target_sources(
   errors PUBLIC
   FILE_SET HEADERS
   BASE_DIRS include
-  FILES include/errors/error.hpp
+  FILES
+    include/errors/error.hpp
+    include/errors/format.hpp
 )
 
 if(NOT SUBPROJECT AND BUILD_TESTING)
@@ -48,14 +50,16 @@ if(NOT SUBPROJECT AND BUILD_TESTING)
   cpmaddpackage(gh:catchorg/Catch2@3.6.0)
   include(${Catch2_SOURCE_DIR}/extras/Catch.cmake)
 
+  cpmaddpackage("gh:fmtlib/fmt#10.2.1")
+
   # Append the main library properties instead of linking the library.
   get_target_property(errors_SOURCES errors SOURCES)
   get_target_property(errors_HEADER_DIRS errors HEADER_DIRS)
 
   # Build tests for the main library
-  add_executable(errors_test test/error_test.cpp ${errors_SOURCES})
+  add_executable(errors_test test/error_test.cpp test/format_test.cpp ${errors_SOURCES})
   target_include_directories(errors_test PRIVATE ${errors_HEADER_DIRS})
-  target_link_libraries(errors_test PRIVATE Catch2::Catch2WithMain)
+  target_link_libraries(errors_test PRIVATE Catch2::Catch2WithMain fmt)
 
   # Enable support to check for test coverage
   include(CheckCoverage)
@@ -68,8 +72,6 @@ if(NOT SUBPROJECT AND BUILD_DOCS)
   include(GenerateDocs)
   target_generate_xml_docs(errors)
 endif()
-
-add_subdirectory(components)
 
 if(NOT SUBPROJECT AND BUILD_DOCS)
   add_subdirectory(docs)
@@ -87,7 +89,7 @@ if(NOT SUBPROJECT AND BUILD_TESTING)
 endif()
 
 install(
-  TARGETS errors errors_format
+  TARGETS errors
   EXPORT errors_targets
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
