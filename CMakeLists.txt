@@ -13,21 +13,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
-if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+if(PROJECT_IS_TOP_LEVEL)
   option(BUILD_DOCS "Enable documentations build" OFF)
   option(BUILD_EXAMPLES "Enable examples build" OFF)
 
   if(BUILD_TESTING)
     enable_testing()
   endif()
-else()
-  set(SUBPROJECT ON)
 endif()
 
 # Initialize CPM.cmake
 include(CPM)
 
-if(NOT SUBPROJECT)
+if(PROJECT_IS_TOP_LEVEL)
   # Statically analyze code by checking for warnings
   cpmaddpackage(gh:threeal/CheckWarning.cmake@2.1.0)
   include(${CheckWarning_SOURCE_DIR}/cmake/CheckWarning.cmake)
@@ -43,7 +41,7 @@ target_sources(
   FILES include/errors/error.hpp
 )
 
-if(NOT SUBPROJECT AND BUILD_TESTING)
+if(PROJECT_IS_TOP_LEVEL AND BUILD_TESTING)
   # Import Catch2 as the main testing framework
   cpmaddpackage(gh:catchorg/Catch2@3.6.0)
   include(${Catch2_SOURCE_DIR}/extras/Catch.cmake)
@@ -64,22 +62,22 @@ if(NOT SUBPROJECT AND BUILD_TESTING)
   catch_discover_tests(errors_test)
 endif()
 
-if(NOT SUBPROJECT AND BUILD_DOCS)
+if(PROJECT_IS_TOP_LEVEL AND BUILD_DOCS)
   include(GenerateDocs)
   target_generate_xml_docs(errors)
 endif()
 
 add_subdirectory(components)
 
-if(NOT SUBPROJECT AND BUILD_DOCS)
+if(PROJECT_IS_TOP_LEVEL AND BUILD_DOCS)
   add_subdirectory(docs)
 endif()
 
-if(NOT SUBPROJECT AND BUILD_EXAMPLES)
+if(PROJECT_IS_TOP_LEVEL AND BUILD_EXAMPLES)
   add_subdirectory(examples)
 endif()
 
-if(NOT SUBPROJECT AND BUILD_TESTING)
+if(PROJECT_IS_TOP_LEVEL AND BUILD_TESTING)
   # Enable automatic target formatting.
   cpmaddpackage(gh:threeal/FixFormat.cmake@1.1.1)
   include(${FixFormat_SOURCE_DIR}/cmake/FixFormat.cmake)
