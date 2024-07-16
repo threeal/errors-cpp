@@ -13,11 +13,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
+option(ERRORS_ENABLE_TESTS "Enable test targets.")
+
 if(PROJECT_IS_TOP_LEVEL)
   option(BUILD_DOCS "Enable documentations build" OFF)
   option(BUILD_EXAMPLES "Enable examples build" OFF)
 
-  if(BUILD_TESTING)
+  if(ERRORS_ENABLE_TESTS)
     enable_testing()
   endif()
 endif()
@@ -41,7 +43,7 @@ target_sources(
   FILES include/errors/error.hpp
 )
 
-if(PROJECT_IS_TOP_LEVEL AND BUILD_TESTING)
+if(PROJECT_IS_TOP_LEVEL AND ERRORS_ENABLE_TESTS)
   # Import Catch2 as the main testing framework
   cpmaddpackage(gh:catchorg/Catch2@3.6.0)
   include(${Catch2_SOURCE_DIR}/extras/Catch.cmake)
@@ -77,7 +79,7 @@ if(PROJECT_IS_TOP_LEVEL AND BUILD_EXAMPLES)
   add_subdirectory(examples)
 endif()
 
-if(PROJECT_IS_TOP_LEVEL AND BUILD_TESTING)
+if(PROJECT_IS_TOP_LEVEL AND ERRORS_ENABLE_TESTS)
   # Enable automatic target formatting.
   cpmaddpackage(gh:threeal/FixFormat.cmake@1.1.1)
   include(${FixFormat_SOURCE_DIR}/cmake/FixFormat.cmake)

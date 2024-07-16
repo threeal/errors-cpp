@@ -9,7 +9,7 @@ target_sources(
 )
 target_link_libraries(errors_format INTERFACE errors fmt)
 
-if(PROJECT_IS_TOP_LEVEL AND BUILD_TESTING)
+if(PROJECT_IS_TOP_LEVEL AND ERRORS_ENABLE_TESTS)
   # Append the main library properties instead of linking the library.
   get_target_property(errors_format_HEADER_DIRS errors_format HEADER_DIRS)
   get_target_property(errors_format_LIBRARIES errors_format INTERFACE_LINK_LIBRARIES)
