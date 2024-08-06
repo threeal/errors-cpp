@@ -17,7 +17,9 @@ jobs:
         uses: actions/checkout@v4.1.7
 
       - name: Configure Project
-        uses: threeal/cmake-action@v1.3.0
+        uses: threeal/cmake-action@v2.0.0
+        with:
+          run-build: false
 
       - name: Build Project
         run: cmake --build build --config Release
@@ -43,9 +45,10 @@ jobs:
         uses: actions/checkout@v4.1.7
 
       - name: Configure Project
-        uses: threeal/cmake-action@v1.3.0
+        uses: threeal/cmake-action@v2.0.0
         with:
           options: BUILD_EXAMPLES=ON
+          run-build: false
 
       - name: Build Examples
         run: cmake --build build --target examples
@@ -61,9 +64,10 @@ jobs:
         run: sudo apt-get install -y doxygen
 
       - name: Configure Project
-        uses: threeal/cmake-action@v1.3.0
+        uses: threeal/cmake-action@v2.0.0
         with:
           options: BUILD_DOCS=ON
+          run-build: false
 
       - name: Build Documentation
         run: cmake --build build --target docs
