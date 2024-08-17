@@ -45,7 +45,7 @@ target_sources(
 
 if(PROJECT_IS_TOP_LEVEL AND ERRORS_ENABLE_TESTS)
   # Import Catch2 as the main testing framework
-  cpmaddpackage(gh:catchorg/Catch2@3.6.0)
+  cpmaddpackage(gh:catchorg/Catch2@3.7.0)
   include(${Catch2_SOURCE_DIR}/extras/Catch.cmake)
 
   # Append the main library properties instead of linking the library.
