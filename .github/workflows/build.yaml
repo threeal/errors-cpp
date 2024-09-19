@@ -7,11 +7,11 @@ on:
 jobs:
   build-project:
     name: Build Project
-    runs-on: ${{ matrix.os }}-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu, windows]
+        os: [ubuntu-22.04, windows-2022]
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.7
@@ -35,11 +35,11 @@ jobs:
 
   build-examples:
     name: Build Examples
-    runs-on: ${{ matrix.os }}-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu, windows]
+        os: [ubuntu-22.04, windows-2022]
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.7
@@ -55,7 +55,7 @@ jobs:
 
   build-docs:
     name: Build Documentation
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.7
