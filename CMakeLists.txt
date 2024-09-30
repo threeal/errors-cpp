@@ -86,8 +86,8 @@ endif()
 
 if(PROJECT_IS_TOP_LEVEL AND ERRORS_ENABLE_TESTS)
   # Enable automatic target formatting.
-  cpmaddpackage(gh:threeal/FixFormat.cmake@1.1.1)
-  include(${FixFormat_SOURCE_DIR}/cmake/FixFormat.cmake)
+  find_package(FixFormat 1.1.1 REQUIRED)
+  include(FixFormat)
   add_fix_format()
 endif()
 
