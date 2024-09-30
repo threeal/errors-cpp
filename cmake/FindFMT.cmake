@@ -1,3 +1,4 @@
+include(CPM)
 cpmaddpackage("gh:fmtlib/fmt#${FMT_FIND_VERSION}")
 
 include(FindPackageHandleStandardArgs)

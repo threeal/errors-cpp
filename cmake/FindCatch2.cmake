@@ -1,3 +1,4 @@
+include(CPM)
 cpmaddpackage(gh:catchorg/Catch2@${Catch2_FIND_VERSION})
 
 include(FindPackageHandleStandardArgs)

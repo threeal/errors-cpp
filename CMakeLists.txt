@@ -29,9 +29,6 @@ if(NOT DEFINED CMAKE_FIND_PACKAGE_PREFER_CONFIG)
   set(CMAKE_FIND_PACKAGE_PREFER_CONFIG TRUE)
 endif()
 
-# Initialize CPM.cmake
-include(CPM)
-
 if(PROJECT_IS_TOP_LEVEL)
   # Statically analyze code by checking for warnings
   find_package(CheckWarning 2.1.0 REQUIRED)

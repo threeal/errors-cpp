@@ -1,3 +1,4 @@
+include(CPM)
 cpmaddpackage(gh:threeal/CheckWarning.cmake@${CheckWarning_FIND_VERSION})
 
 include(FindPackageHandleStandardArgs)

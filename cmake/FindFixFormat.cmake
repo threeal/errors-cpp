@@ -1,3 +1,4 @@
+include(CPM)
 cpmaddpackage(gh:threeal/FixFormat.cmake@${FixFormat_FIND_VERSION})
 
 include(FindPackageHandleStandardArgs)
