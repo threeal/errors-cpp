@@ -34,8 +34,8 @@ include(CPM)
 
 if(PROJECT_IS_TOP_LEVEL)
   # Statically analyze code by checking for warnings
-  cpmaddpackage(gh:threeal/CheckWarning.cmake@2.1.0)
-  include(${CheckWarning_SOURCE_DIR}/cmake/CheckWarning.cmake)
+  find_package(CheckWarning 2.1.0 REQUIRED)
+  include(CheckWarning)
   add_check_warning()
 endif()
 
