@@ -6,6 +6,7 @@ target_sources(
   FILE_SET HEADERS
   BASE_DIRS include
   FILES include/errors/format.hpp
+    include/errors/format.ipp
 )
 target_link_libraries(errors_format INTERFACE errors fmt)
 
