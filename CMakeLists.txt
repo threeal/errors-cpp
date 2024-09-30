@@ -24,6 +24,11 @@ if(PROJECT_IS_TOP_LEVEL)
   endif()
 endif()
 
+# Prefer system packages over the find modules provided by this project.
+if(NOT DEFINED CMAKE_FIND_PACKAGE_PREFER_CONFIG)
+  set(CMAKE_FIND_PACKAGE_PREFER_CONFIG TRUE)
+endif()
+
 # Initialize CPM.cmake
 include(CPM)
 
