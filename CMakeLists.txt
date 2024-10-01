@@ -24,13 +24,15 @@ if(PROJECT_IS_TOP_LEVEL)
   endif()
 endif()
 
-# Initialize CPM.cmake
-include(CPM)
+# Prefer system packages over the find modules provided by this project.
+if(NOT DEFINED CMAKE_FIND_PACKAGE_PREFER_CONFIG)
+  set(CMAKE_FIND_PACKAGE_PREFER_CONFIG TRUE)
+endif()
 
 if(PROJECT_IS_TOP_LEVEL)
   # Statically analyze code by checking for warnings
-  cpmaddpackage(gh:threeal/CheckWarning.cmake@2.1.0)
-  include(${CheckWarning_SOURCE_DIR}/cmake/CheckWarning.cmake)
+  find_package(CheckWarning 2.1.0 REQUIRED)
+  include(CheckWarning)
   add_check_warning()
 endif()
 
@@ -45,8 +47,8 @@ target_sources(
 
 if(PROJECT_IS_TOP_LEVEL AND ERRORS_ENABLE_TESTS)
   # Import Catch2 as the main testing framework
-  cpmaddpackage(gh:catchorg/Catch2@3.7.1)
-  include(${Catch2_SOURCE_DIR}/extras/Catch.cmake)
+  find_package(Catch2 3.7.1 REQUIRED)
+  include(Catch)
 
   # Append the main library properties instead of linking the library.
   get_target_property(errors_SOURCES errors SOURCES)
@@ -81,8 +83,8 @@ endif()
 
 if(PROJECT_IS_TOP_LEVEL AND ERRORS_ENABLE_TESTS)
   # Enable automatic target formatting.
-  cpmaddpackage(gh:threeal/FixFormat.cmake@1.1.1)
-  include(${FixFormat_SOURCE_DIR}/cmake/FixFormat.cmake)
+  find_package(FixFormat 1.1.1 REQUIRED)
+  include(FixFormat)
   add_fix_format()
 endif()
 
