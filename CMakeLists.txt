@@ -31,9 +31,8 @@ endif()
 
 if(PROJECT_IS_TOP_LEVEL)
   # Statically analyze code by checking for warnings
-  find_package(CheckWarning 2.1.0 REQUIRED)
-  include(CheckWarning)
-  add_check_warning()
+  find_package(CheckWarning 3.0.0 REQUIRED)
+  add_check_warning(TREAT_WARNINGS_AS_ERRORS)
 endif()
 
 # Build the main library
