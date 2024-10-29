@@ -31,7 +31,7 @@ endif()
 
 if(PROJECT_IS_TOP_LEVEL)
   # Statically analyze code by checking for warnings
-  find_package(CheckWarning 3.1.0 REQUIRED)
+  find_package(CheckWarning 3.2.0 REQUIRED)
   add_check_warning(TREAT_WARNINGS_AS_ERRORS)
 endif()
 
