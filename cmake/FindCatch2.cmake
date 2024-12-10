@@ -1,7 +1,9 @@
-include(CPM)
-cpmaddpackage(gh:catchorg/Catch2@${Catch2_FIND_VERSION})
+find_package(CDeps 0.1.0 REQUIRED)
 
-include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(Catch2 REQUIRED_VARS Catch2_ADDED)
+cdeps_download_package(Catch2 github.com/catchorg/Catch2 v${Catch2_FIND_VERSION})
+cdeps_build_package(Catch2)
+cdeps_install_package(Catch2)
 
-list(PREPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/extras)
+include(CMakeFindDependencyMacro)
+find_dependency(Catch2 ${Catch2_FIND_VERSION} CONFIG
+  PATHS ${Catch2_INSTALL_DIR}/lib/cmake NO_DEFAULT_PATH)
