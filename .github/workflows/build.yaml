@@ -27,12 +27,6 @@ jobs:
       - name: Install Project
         run: cmake --install build --prefix install
 
-      - name: Upload Project
-        uses: actions/upload-artifact@v4.6.2
-        with:
-          name: package-${{ matrix.os }}
-          path: install
-
   build-examples:
     name: Build Examples
     runs-on: ${{ matrix.os }}
@@ -71,8 +65,3 @@ jobs:
 
       - name: Build Documentation
         run: cmake --build build --target docs
-
-      - name: Upload Documentation
-        uses: actions/upload-pages-artifact@v3.0.1
-        with:
-          path: build/docs/html
