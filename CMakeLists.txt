@@ -46,7 +46,7 @@ target_sources(
 
 if(PROJECT_IS_TOP_LEVEL AND ERRORS_ENABLE_TESTS)
   # Import Catch2 as the main testing framework
-  find_package(Catch2 3.9.0 REQUIRED)
+  find_package(Catch2 3.9.1 REQUIRED)
   include(Catch)
 
   # Append the main library properties instead of linking the library.
