@@ -33,7 +33,7 @@ jobs:
         run: cmake --build build --target docs
 
       - name: Upload Documentation
-        uses: actions/upload-pages-artifact@v3.0.1
+        uses: actions/upload-pages-artifact@v4.0.0
         with:
           path: build/docs/html
 
