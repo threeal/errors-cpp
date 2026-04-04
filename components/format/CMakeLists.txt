@@ -1,4 +1,4 @@
-find_package(FMT 11.2.0 REQUIRED)
+find_package(FMT 12.0.0 REQUIRED)
 
 add_library(errors_format INTERFACE)
 target_sources(
