@@ -88,7 +88,7 @@ if(PROJECT_IS_TOP_LEVEL AND ERRORS_ENABLE_TESTS)
 endif()
 
 install(
-  TARGETS errors errors_format
+  TARGETS errors errors_format fmt
   EXPORT errors_targets
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
